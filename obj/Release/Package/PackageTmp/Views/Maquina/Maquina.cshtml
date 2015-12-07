@@ -1,0 +1,98 @@
+﻿
+<html  ng-app="TicketeraApp">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <title>Ticketera</title>
+        <link href="~/Resources/bootstrap-3.3.5-dist/css/bootstrap.css" rel="stylesheet"
+        type="text/css" />
+
+        <link href="~/Resources/js/ng-bootstrap.treeview/dist/abn_tree.css" rel="stylesheet" type="text/css" />
+        <link href="~/Resources/css/treeview.css" rel="stylesheet" type="text/css" />
+        <link href="~/Resources/css/special-glyphicons.css" rel="stylesheet" type="text/css" />
+        <link href="~/Resources/css/ticketera.css" rel="stylesheet" type="text/css" />
+        <link href="~/Resources/css/scrollbar.css" rel="stylesheet" />
+
+        <script src="~/Resources/js/jquery-2.1.4.js" type="text/javascript"></script>
+        <script src="~/Resources/bootstrap-3.3.5-dist/js/bootstrap.js" type="text/javascript"></script>
+        <script src="~/Resources/js/angular.js" type="text/javascript"></script>
+    </head>
+    <body style="background-color:#004E91; color:White">
+        
+            
+        <div class="ticketera-panel"  ng-controller="MaquinaController as config" ng-init="config.init(tab)" style="right:-15px">
+            <div style="position:absolute;top:5;left:5">
+                <h3 style="margin-top:0" class="text-center">{{config.clockString}}</h3>
+                <h5 style="margin-top:0px" class="text-center">{{config.dateString}}</h5>
+
+            </div>
+            <div style="position:absolute;top:10;right:20">
+                <img ng-click="config.togglePreferencialButtons()" style="float:right; width:80%" src="~/Resources/img/logo_cotas.png">
+			</div>
+            <h3 class="page-header text-center">
+            <b>{{config.ticketera.Descripcion | uppercase}}</b></h3>
+            <div ng-repeat="group in config.ticketera.grupos">
+                <label class="label-control" style="width:100%">
+                    <h3><b>{{group.Descripcion | uppercase }}</b></h3></label>
+                <div class="form-group ">
+                        <div class="text-center" ng-class="{'div-success': $first, 'div-info': $middle , 'div-danger': $last}" >
+                                <div ng-if="group.shownChildrenLength > 1" class="btn-div" ng-repeat="child in group.hijos" ng-class="'col-md-' + 5">
+                                    <a ng-if="child.show" ng-init="config.paintButtons()" ng-click="config.printTicket(child)" class="btn btn-lg btn-tick" style="margin: 10px auto;position:relative" >
+                                        <img ng-src="{{child.Imagen}}" style="height:25px;margin-right:10px">{{child.Descripcion}}
+                                    </a>
+                                </div>
+                                <div ng-if="group.shownChildrenLength == 1 && child.show" class="btn-div" ng-repeat="child in group.hijos" ng-class="'col-md-' + 11">
+                                    <a ng-if="child.show" ng-init="config.paintButtons()" ng-click="config.printTicket(child)" class="btn btn-lg btn-tick" style="margin: 10px auto;position:relative" >
+                                        <img ng-src="{{child.Imagen}}" style="height:25px;margin-right:10px">{{child.Descripcion}}
+                                    </a>
+                                </div>
+                        </div>
+                </div>
+            </div>
+        <div class="modal fade" id="confirmPreferencial" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div  style="height:100%;background-color:#004E91; color:White" class="modal-content">
+              <div class="modal-header">
+                  
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Confirmación de atención preferencial</h4>
+              </div>
+              <div class="modal-body">
+                  <div id="errorAlert" ng-show="config.response.result == false" class="alert alert-danger">
+                    <button type="button" class="close" ng-click="config.closeAlert()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                        <span class="glyphicon glyphicon-alert" style="margin-right:5px"></span>
+                        {{config.response.value}}
+                </div>
+                  <form name="myForm" method="POST" ng-submit="config.printTicket()" novalidate>
+                      <div class="form-group" ng-class="{ 'has-error': myForm.password.$dirty && myForm.password.$invalid, 'has-success' : config.password==config.correctPassword && myForm.password.$dirty && myForm.password.$valid}">
+                        <input name="password" class="form-control input-lg" ng-model="config.password" type="password" placeholder="PIN" readonly/>
+                          <p class="help-block" ng-if="myForm.constrasena.$error.required && myForm.contrasena.$dirty">Campo requerido</p>
+                          <div id="numpad" class="text-center">
+                              <div ng-repeat="num in config.numbers" class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                  <a ng-click="config.typePassword(num)" style="margin:10px auto" class="btn btn-default btn-lg col-xs-12"><h2>{{num}}</h2></a>
+                              </div>
+                              <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                    <button style="margin:10px auto" class="btn btn-danger btn-lg" data-dismiss="modal"><span class="glyphicon glyphicon-lg glyphicon-remove"></span></button>
+                              </div>
+                              <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                  <a ng-click="config.typePassword(0)" style="margin:10px auto" class="btn btn-default btn-lg col-xs-12"><h2>0</h2></a>
+                              </div>
+                              <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                    <button type="submit" style="margin:10px auto" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-lg glyphicon-print"></span></button>
+                              </div>
+                          </div>
+                      </div>
+                  </form>
+                    
+              </div>
+              
+            </div>
+          </div>
+        </div>
+        
+        </div>
+        <script src="~/Resources/operador/datetimepicker/js/moment.js"></script>
+        <script src="~/Resources/js/angular-modules/maquina.js" type="text/javascript"></script>
+    </body>
+</html>

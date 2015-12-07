@@ -1,0 +1,50 @@
+﻿@{
+    Layout = "~/Views/Shared/_CenteredLayout.cshtml";
+}
+<link href="~/Resources/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css" />
+
+
+<h2 class="page-header">
+    Exportar Atenciones
+</h2>
+<div class="entity-editor" ng-controller="ExportadorAtencionController">
+    <div ng-show="info.status == true" class="alert alert-info">
+        <button type="button" class="close" ng-click="info.status = false" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+            <span class="glyphicon glyphicon-info-sign" style="margin-right:5px"></span>
+            {{info.message}}
+    </div>
+    <div class="row">
+        <form method="post" ng-submit="exportar()">
+            <div class="form-group col-md-4">
+                <div class='input-group input-group-sm date'>
+                    <input id="dTPInicio" type='text' class="form-control input-lg" placeholder="Inicio"/>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group col-md-4">
+                <div class='input-group input-group-sm date'>
+                    <input id="dTPFin" type='text' class="form-control input-lg" placeholder="Fin"/>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group col-md-4">
+                <a ng-click="volver(tab)" class="btn btn-sm btn-link">Volver</a>
+                <button type="submit" class="btn btn-sm btn-primary">Exportar</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="~/Resources/datetimepicker/js/moment.js" type="text/javascript"></script>
+<script src="~/Resources/datetimepicker/js/datetimepicker.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        $('.date').datetimepicker({
+            format: 'DD/MM/YYYY',
+            locale: 'es'
+        });
+    });
+</script>

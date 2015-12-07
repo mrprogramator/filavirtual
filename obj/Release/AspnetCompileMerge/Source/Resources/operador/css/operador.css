@@ -1,0 +1,225 @@
+body
+{
+    overflow: hidden;
+    background-color:#337ab7;
+    z-index=-1;
+}
+.ticket-table tr 
+{
+  display: block;
+  max-height: 38px;
+}
+
+.ticket-table th
+{ 
+  width: 360px;
+}
+
+.ticket-table td
+{
+  width: 1000px;
+}
+
+.ticket-table tbody 
+{ 
+  display: block; 
+  height: 300px; 
+  overflow: auto;
+}
+
+.modal-blue
+{
+    max-height: 450px;
+    background-color:#337ab7;
+}
+
+.footer-container
+{
+  position:absolute;
+  text-align: center;
+  bottom: 0;
+  width: 100%;
+}
+
+.li-header
+{
+  margin-top:0px;
+}
+.li-excuse
+{
+  margin-left : 10px;
+}
+.li-title a
+{
+  color:black;
+  text-decoration: blink;
+  
+}
+
+.li-title
+{
+  margin-left: 15px;
+}
+li
+{
+  cursor : pointer;
+}
+footer
+{
+  color: white;
+}
+
+
+.container
+{
+  background-color: white;
+  padding-top:20px;
+  padding-bottom:0px;
+  max-height: 370px;
+}
+
+.op-header
+{
+  background-color:#337ab7;
+  color:white;
+  padding-top: 10px;
+}
+
+.op-header small
+{
+  color:white;
+}
+
+.border-div {
+    border-radius: 10px;
+    padding: 20px; 
+ 	border: 1px solid #eee;	
+}
+
+span.glyphicon-lg {
+    font-size: 2.9em;
+}
+
+span.glyphicon-md {
+	padding-top:10px;
+	margin-left:-2px;
+    font-size: 2.3em;
+}
+
+span.glyphicon-mdd {
+	padding-top:10px;
+	margin-left:-15px;
+    font-size: 2.1em;
+}
+
+@media screen and (max-width: 300px) 
+{
+    .third-column
+    {
+    	margin-left: 0px;
+    }
+    .first-column
+    {
+    	margin-right: 0px;
+      z-index:3000;
+    }
+}
+
+.fourth-column
+{
+    text-align: center;
+    max-width: 230px;
+    top: -15px;
+    margin-bottom: -16px;
+}
+
+.modal
+{
+  z-index: 8000000;
+}
+
+.first-column
+{
+  z-index:9;
+}
+
+@media screen and (min-width: 300px)
+{
+	.third-column
+	{
+		max-width:15px;
+		margin-left:-30px
+	}
+	.first-column
+    {
+    	margin-right: -40px;
+    }
+}
+
+button 
+{
+  -webkit-app-region: no-drag;
+}
+span 
+{
+    -webkit-app-region: no-drag;
+}
+
+.modal-open .modal
+{
+  overflow: hidden;
+}
+
+#transaccionModal 
+{
+    height:100%;
+    width:100%;
+}
+
+
+
+/*.hover 
+{
+    position:relative;
+    top:10px;
+    left:50px;
+}
+
+.tooltip 
+{ /* hide and position tooltip 
+  top:5px;
+  right:-5px;
+  background-color:black;
+  color:white;
+  border-radius:5px;
+  opacity:0;
+  position:relative;
+  -webkit-transition: opacity 0.5s;
+  -moz-transition: opacity 0.5s;
+  -ms-transition: opacity 0.5s;
+  -o-transition: opacity 0.5s;
+  transition: opacity 0.5s;
+}
+
+.btn:hover .tooltip
+{ /* display tooltip on hover 
+    position: relative;
+    opacity:1;
+}
+
+.a:hover .tooltip
+{ /* display tooltip on hover
+    position: relative;
+    opacity:1;
+    -webkit-transition: opacity 0.5s;
+  -moz-transition: opacity 0.5s;
+  -ms-transition: opacity 0.5s;
+  -o-transition: opacity 0.5s;
+  transition: opacity 0.5s;
+}
+
+.panel-heading:hover .tooltip
+{ /* display tooltip on hover
+    opacity:1;
+}
+*/

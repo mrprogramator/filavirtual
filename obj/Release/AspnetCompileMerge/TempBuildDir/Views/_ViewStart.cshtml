@@ -1,0 +1,20 @@
+﻿@{
+    if (Request.IsAjaxRequest() || 
+        !String.IsNullOrEmpty(Request["ajax"]) || 
+        Request.Url.AbsolutePath.ToString().Contains("ticketeras") ||
+        Request.Url.AbsolutePath.ToString().Contains("televisor") ||
+        Request.Url.AbsolutePath.ToString().Contains("operador"))
+        
+    {
+        Layout = null;
+    }
+    else
+    {
+        Layout = "Shared/_Layout.cshtml";
+    }
+    
+    if (!String.IsNullOrEmpty(Request["replayout"]))
+    {
+        Layout = "Shared/_ReportLayout.cshtml";
+    }
+}

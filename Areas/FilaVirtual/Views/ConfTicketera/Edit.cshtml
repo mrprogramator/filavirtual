@@ -1,0 +1,97 @@
+﻿@{
+    Layout = "~/Views/Shared/_CenteredLayout.cshtml";
+
+    ViewBag.Title = "Editar Configuración";
+}
+<div ng-controller="ConfTicketeraController as config">
+@model SistemaDeGestionDeFilas.Areas.FilaVirtual.Models.ConfTicketera
+    <h2 class="page-header">
+        @ViewBag.Title
+    </h2>
+    <div class="entity-editor" ng-controller="ConfTicketeraController as config" ng-init="config.init(tab)">
+        <div ng-show="routing.response.result == false" class="alert alert-danger">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+      
+          <h4 class="title">Error</h4>
+          <p>{{routing.response.value}}</p>
+        </div>
+        <form id="identicalForm" ng-init="config.detailInit(tab)" method="POST" data-toggle="validator" ng-submit="config.update(tab, config.item)">
+        <div class="form-group ">
+            <label class="label-control">Descripcion</label>
+            <input class="form-control" ng-model="config.item.Descripcion" required/>
+            <div class="help-block with-errors">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="label-control">
+                Tipo</label>
+            <select class="form-control" ng-model="config.item.TipoId" required>
+                <option ng-selected="{{tipo.Id == config.item.TipoId }}"
+                        ng-repeat="tipo in config.tipos"
+                        value="{{tipo.Id}}">
+                  {{tipo.Nombre}}
+                </option>
+            </select>
+        </div>
+        <div class="form-group" ng-if="config.item.TipoId=='TICOPC'">
+            <label class="label-control">
+                Padre</label>
+            <select class="form-control" ng-model="config.item.PadreId" required>
+                <option ng-selected="{{padre.Id == config.item.PadreId }}"
+                        ng-repeat="padre in config.ticketera.grupos"
+                        value="{{padre.Id}}">
+                  {{padre.Descripcion}}
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="label-control">
+                Tipo de Atención</label>
+            <select class="form-control" ng-model="config.item.TipoAtencionId" required>
+                <option ng-if="config.item.TipoId!='TICOPC'" ng-selected="tipat.Id == config.item.TipoAtencionId"
+                        ng-repeat="tipat in config.tipoAtenciones"
+                        value="{{tipat.Id}}">
+                  {{tipat.Nombre}}
+                </option>
+                <option ng-if="config.item.TipoId=='TICOPC'" ng-selected="tipoTicket.Id == config.item.TipoAtencionId"
+                        ng-repeat="tipoTicket in config.tiposTicket"
+                        value="{{tipoTicket.Id}}">
+                  {{tipoTicket.Nombre}}
+                </option>
+            </select>
+        </div>
+        <div class="form-group ">
+            <label class="label-control"># Ticket</label>
+            <input class="form-control" ng-model="config.item.NroTicket" type="numeric" required/>
+            <div class="help-block with-errors">
+            </div>
+        </div>
+        <div class="form-group ">
+            <label class="label-control">Prefijo</label>
+            <input class="form-control" ng-model="config.item.Prefijo" required/>
+            <div class="help-block with-errors">
+            </div>
+        </div>
+        <div class="form-group ">
+            <label class="label-control">Imagen</label>
+            <input class="form-control" ng-model="config.item.Imagen" />
+            <div class="help-block with-errors">
+            </div>
+            <div class="text-center">
+                <img ng-src="{{config.item.Imagen}}" style="height:60px; margin:auto">
+            </div>
+        </div>
+        <div class="text-right">
+            <a ng-click="config.volver(tab)" class="btn btn-link" data-ajax>
+                Cancelar</a>
+            <button type="submit" class="btn btn-primary">
+                Guardar</button>
+        </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    $('form[data-toggle="validator"]').validator();
+</script>

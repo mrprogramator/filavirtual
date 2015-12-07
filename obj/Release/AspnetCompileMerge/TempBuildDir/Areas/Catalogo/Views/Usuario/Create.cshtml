@@ -1,0 +1,58 @@
+﻿@{
+    Layout = "~/Views/Shared/_CenteredLayout.cshtml";
+
+    ViewBag.Title = "Nuevo Usuario";
+}
+<h2 class="page-header">
+    @ViewBag.Title
+</h2>
+<div class="entity-editor" ng-controller="UsuarioController as usuario">
+    <div ng-show="usuario.response.result == false" class="alert alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      
+      <h4 class="title">Error</h4>
+      <p>{{usuario.response.value}}</p>
+    </div>
+    <form id="identicalForm" method="POST" data-toggle="validator" ng-submit="usuario.save(tab, item)">
+    <div class="form-group ">
+        <label class="label-control">Código</label>
+        <input class="form-control" ng-model="item.Id" required/>
+        <div class="help-block with-errors">
+        </div>
+    </div>
+    
+    <div class="form-group ">
+        <label class="control-label" for="Email">
+            Email</label>
+        <input class="form-control" type="email" ng-model="item.Email" required/>
+        <div class="help-block with-errors">
+        </div>
+    </div>
+    <div class="form-group ">
+        <label class="control-label" for="Password">
+            Contraseña</label>
+            <input id="Password" class="form-control" type="password" ng-model="item.Password" required />
+        <div class="help-block with-errors">
+        </div>
+    </div>
+    <div class="form-group ">
+        <label class="control-label" for="Confirm">
+            Confirmar Contraseña</label>
+        <input class="form-control " id="Confirm" name="Confirm" type="password" data-match="#Password"
+            data-match-error="No coincide con la contraseña" required />
+        <div class="help-block with-errors">
+        </div>
+    </div>
+    <div class="text-right">
+        <a href="#" ng-click="usuario.index(tab)" class="btn btn-link" data-ajax>
+            Cancelar</a>
+        <button type="submit" class="btn btn-primary">
+            Guardar</button>
+    </div>
+    </form>
+</div>
+<script type="text/javascript">
+    $('form[data-toggle="validator"]').validator();
+</script>

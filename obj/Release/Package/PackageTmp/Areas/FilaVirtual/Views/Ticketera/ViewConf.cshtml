@@ -1,0 +1,84 @@
+﻿<div ng-controller="ConfTicketeraController as config" ng-init="config.init(tab)">
+     <div ng-show="config.response.result == false" class="alert alert-danger">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+      
+          <h4 class="title">Error</h4>
+          <p>{{config.response.value}}</p>
+    </div>
+    <div>
+        <a class="btn btn-default btn-sm" ng-click="config.volver(tab)">
+            <span class="glyphicon glyphicon-arrow-left"></span>Volver 
+        </a>
+    </div>
+     <h3 class="page-header">
+        Configuración de la Ticketera {{config.ticketera.Descripcion}}
+    </h3>
+    
+    <div class="col-md-4" style="margin-top:55px">
+        <div class="panel panel-default with-table">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-md-8">
+                        <a class="btn btn-primary btn-sm" ng-click="config.create(tab)">
+                            <span class="glyphicon glyphicon-file"></span>Nuevo </a>
+                    </div>
+                    <div class="col-md-4">
+                    </div>
+                </div>
+            </div>
+            <div class="table">
+                <abn-tree ng-if="!config.loading" tree-data="config.data" expand-level="2" 
+                    on-select="config.selectedBranch = branch" ng-click="config.handleClick()">
+                 </abn-tree>
+            </div>
+        </div>
+        <div class="text-right">
+            <a ng-click="config.detail(tab, config.selectedItem)" class="btn btn-xs btn-default"
+                data-ajax><span class="glyphicon glyphicon-eye-open"></span>
+                <text class="hidden-xs">Detalles</text>
+            </a>
+            <a ng-click="config.edit(tab, config.selectedItem)" class="btn btn-xs btn-default"
+                data-ajax><span class="glyphicon glyphicon-pencil"></span>
+                <text class="hidden-xs">Modificar</text>
+            </a>
+            <a ng-click="config.delete(tab, config.selectedItem)" class="btn btn-xs btn-default "
+                data-ajax><span class="glyphicon glyphicon-remove"></span>
+                <text class="hidden-xs">Eliminar</text>
+            </a>
+         </div>
+     </div>
+     <div class="col-md-8" style="margin-top:-25px">
+        <div style="right:-15px; background-color:#004E91; color:White">
+            <div class="ticketera-panel-xs" ng-style="{'height':config.items.length/2*150}">
+                <div style="position:absolute;padding-top:7px;right:20px">
+                    <img style="float:right; width:40%" src="~/Resources/img/logo_cotas.png">
+			    </div>
+                <h4 class="page-header text-center" style="padding-top:40px">
+                    <b>{{config.ticketera.Descripcion | uppercase}}</b>
+                </h4>
+                <div ng-repeat="group in config.ticketera.grupos">
+                    <label class="label-control" style="width:100%">
+                        <h4><b>{{group.Descripcion | uppercase }}</b></h4></label>
+                    <div class="form-group ">
+                            <div class="text-center" ng-class="{'div-success': $first, 'div-info': $middle , 'div-danger': $last}" >
+                                <div ng-if="group.hijos.length > 1" class="btn-div" ng-repeat="child in group.hijos" ng-class="'col-xs-' + (12/2 -2)">
+                                    <a ng-init="config.paintButtons()" class="btn btn-lg btn-tick-xs" style="margin: 10px auto;position:relative" >
+                                        <img ng-src="{{child.Imagen}}" style="height:25px;margin-right:10px">{{child.Descripcion}}
+                                    </a>
+                                </div>
+                                <div ng-if="group.hijos.length < 2" class="btn-div" ng-repeat="child in group.hijos" ng-class="'col-xs-' + 10">
+                                    <a ng-init="config.paintButtons()" class="btn btn-lg btn-tick-xs" style="margin: 10px auto;position:relative" >
+                                        <img ng-src="{{child.Imagen}}" style="height:25px;margin-right:10px">{{child.Descripcion}}
+                                    </a>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+     </div>
+     
+</div>

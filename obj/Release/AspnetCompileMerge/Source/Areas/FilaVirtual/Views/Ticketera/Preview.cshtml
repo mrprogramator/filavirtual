@@ -1,0 +1,35 @@
+﻿@model SistemaDeGestionDeFilas.Areas.FilaVirtual.Models.Ticketera
+<div  ng-controller="ConfTicketeraController as config" > 
+    <div>
+        <a class="btn btn-default btn-sm" ng-click="config.volver(tab)">
+            <span class="glyphicon glyphicon-arrow-left"></span>Volver 
+        </a>
+    </div>
+    <div ng-controller="ConfTicketeraController as config" class="ticketera-container" ng-style="{'height':config.items.length/2*180}">    
+        <div class="ticketera-panel" ng-init="config.init(tab)"  style="padding-top:45px">
+            <div style="position:absolute;top:240px;right:40px">
+                <img style="float:right; width:80%" src="~/Resources/img/logo_cotas.png">
+			</div>
+            <h3 class="page-header text-center">
+            <b>{{config.ticketera.Descripcion | uppercase}}</b></h3>
+            <div ng-repeat="group in config.ticketera.grupos">
+                <label class="label-control" style="width:100%">
+                    <h3><b>{{group.Descripcion | uppercase }}</b></h3></label>
+                <div class="form-group ">
+                        <div class="text-center" ng-class="{'div-success': $first, 'div-info': $middle , 'div-danger': $last}" >
+                            <div ng-if="group.hijos.length > 1" class="btn-div" ng-repeat="child in group.hijos" ng-class="'col-md-' + (12/2 -1)">
+                                <a ng-init="config.paintButtons()" class="btn btn-lg btn-tick" style="margin: 10px auto;position:relative" >
+                                    <img ng-src="{{child.Imagen}}" style="height:25px;margin-right:10px">{{child.Descripcion}}
+                                </a>
+                            </div>
+                            <div ng-if="group.hijos.length < 2" class="btn-div" ng-repeat="child in group.hijos" ng-class="'col-md-' + 11">
+                                <a ng-init="config.paintButtons()" class="btn btn-lg btn-tick" style="margin: 10px auto;position:relative" >
+                                    <img ng-src="{{child.Imagen}}" style="height:25px;margin-right:10px">{{child.Descripcion}}
+                                </a>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

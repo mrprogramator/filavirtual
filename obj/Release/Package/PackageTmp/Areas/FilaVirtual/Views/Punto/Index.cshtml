@@ -1,0 +1,71 @@
+﻿<h2 class="page-header">
+    Puntos
+</h2>
+<div class="panel panel-default with-table" ng-controller = "PuntoController as punto">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-md-8">
+                <a class="btn btn-primary btn-sm" ng-click="punto.create(tab)">
+                <span class="glyphicon glyphicon-file"></span>Nuevo </a>
+            </div>
+            <div class="col-md-4">
+            </div>
+        </div>
+    </div>
+
+    <table class="table" style="margin: 4px">
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Descripción
+            </th>
+            <th>
+            </th>
+
+            <th></th>
+        </tr>
+            <tr ng-if="!punto.items.length && !punto.loading">
+               <td >No hay registros</td>
+               <td>
+               </td>
+               <td>
+               </td>
+            </tr>
+            <tr ng-if="punto.loading">
+               <td >Obteniendo datos</td>
+               <td>
+               </td>
+               <td>
+               </td>
+            </tr>
+
+            <tr ng-repeat="item in punto.items">
+                <td>
+                    {{item.Id}}
+                </td>
+                <td>
+                    {{item.Descripcion}}
+                </td>
+                <td class=" text-right col-md-4 col-lg-4 col-xs-4">
+                           
+                    <a  ng-click="punto.detail(tab,item.Id)" class="btn btn-xs btn-default" data-ajax>
+                        <span class="glyphicon glyphicon-eye-open"></span>
+                        <text class="hidden-xs">Detalles</text>
+                    </a>
+                    
+                    <a  ng-click="punto.edit(tab,item.Id)" class="btn btn-xs btn-default" data-ajax>
+                        <span class="glyphicon glyphicon-pencil"></span>
+                        <text class="hidden-xs">Modificar</text>
+                    </a>
+                            
+                    <a ng-click="punto.delete(tab,item.Id)" class="btn btn-xs btn-default " data-ajax>
+                        <span class="glyphicon glyphicon-remove"></span>
+                        <text class="hidden-xs">Eliminar</text>
+                    </a>
+                </td>
+            </tr>
+    </table>
+    
+</div> 

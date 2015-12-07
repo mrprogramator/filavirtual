@@ -1,0 +1,54 @@
+﻿@model SistemaDeGestionDeFilas.Areas.FilaVirtual.Models.Atencion
+<div>
+    <h2 class="page-header">
+        Transacciones de la Atenci&oacute;n @Model.Id
+    </h2>
+
+    <div class="panel panel-default with-table" ng-init="atencion.detalleInit(tab)" ng-controller="AtencionController as atencion">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-8">
+                    <a class="btn btn-primary btn-sm" ng-click="atencion.detail(tab,atencion.item.Id)">
+                    <span class="glyphicon glyphicon-level-up"></span>Volver </a>
+                </div>
+                <div class="col-md-4">
+                </div>
+            </div>
+        </div>
+
+        <table class="table" style="margin: 4px">
+            <tr>
+                <th>
+                    Servicio
+                </th>
+                <th>
+                    Observaciones
+                </th>
+                <th>
+                    Tiempo
+                </th>
+                <th><!--spacer--></th>
+            </tr>
+            <tr ng-if="atencion.loading">
+                <td>Obteniendo datos...</td>
+                <td></td>
+            </tr>
+            <tr ng-if="atencion.items.length==0 && !atencion.loading">
+                <td>No hay registros</td>
+                <td></td>
+            </tr>
+                <tr ng-repeat="trans in atencion.item.transacciones">
+                    <td>
+                        {{trans.ServicioValor}}
+                    </td>
+                    <td>
+                        {{trans.Observaciones}}
+                    </td>
+                    <td>
+                        {{trans.Tiempo |  date:"'00':mm:ss "}}
+                    </td>
+                    <td><!--spacer--></td>
+                </tr>
+        </table>
+    </div> 
+</div>

@@ -1,0 +1,47 @@
+﻿
+<div ng-if="tabs.length==0" style="margin-top:70px;margin-left:30px">
+    <div class="jumbotron" style="background-color:transparent">
+        <div class="container">
+            <h1>Bienviendo al Sistema</h1>
+            <p>Elija una de las opciones del menú de la derecha.</p>
+            <p></p>
+            <div class="text-center">
+                <img style="max-height:120px; margin:15px" src="~/Resources/img/electron.png" />
+                <p>Descargue el Módulo del Operador para llevar el control de sus atenciones:</p>
+                <p><a class="btn btn-link btn-lg" onclick="downloadOperator('operador-win-32bits')" role="button">Descargar para Windows 32 bits</a></p>
+                <p><a class="btn btn-link btn-lg" onclick="downloadOperator('operador-win-64bits')" role="button">Descargar para Windows 64 bits</a></p>
+                <p><a class="btn btn-link btn-lg" onclick="downloadOperator('operador-linux-32bits')" role="button">Descargar para Linux 32 bits</a></p>
+                <p><a class="btn btn-link btn-lg" onclick="downloadOperator('operador-linux-64bits')" role="button">Descargar para Linux 64 bits</a></p>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-if="tabs.length > 0" ng-show="!tabctrl.loading" style=" padding-top: 31px; padding-left: 15px; width: 100%" >
+        <tabset class="tab-container">
+            <tab ng-repeat="tab in tabs" active="tab.active" tab-highlight>
+                <tab-heading style="width:100%">
+                    <span>{{tab.title}}</span>
+                    <i class="glyphicon glyphicon-remove"
+                        ng-click="tabctrl.removeTab($index)"></i>
+                </tab-heading>
+                <div ng-hide="tab.templateUrl != null" >
+                      <form ng-submit="tab.templateUrl = tab.previewUrl">
+                        <div class="input-group " style="margin-top:-24px; right:20px">
+                          <input type="text" class="form-control" placeholder="Ingrese una URL" ng-model='tab.previewUrl'>
+                          <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-arrow-right"></span></button>
+                          </span>
+                        </div>
+                      </form>
+        
+                    <h2 class="page-header">Página vacía</h2>
+                    <blockquote>
+                        Ingrese una URL para cargar el contenido.
+                    </blockquote>
+                </div>
+                <div ng-show="tab.templateUrl != null" class="tab-body" ng-include="tab.templateUrl" ng-controller="RoutingController as routing" style=""></div>
+          </tab>
+          <button class="btn btn-default hidden" ng-click="tabctrl.newTab()"></button>
+    </tabset>
+    </div>

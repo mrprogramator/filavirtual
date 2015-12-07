@@ -1,0 +1,54 @@
+﻿@model SistemaDeGestionDeFilas.Areas.FilaVirtual.Models.Ticketera
+@{
+    Layout = "~/Views/Shared/_CenteredLayout.cshtml";
+}
+<div ng-controller="TicketeraController as ticketera">
+    <div ng-show="ticketera.response.result == false" class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="title">
+            Error</h4>
+        <p>{{ticketera.response.value}}</p>
+    </div>
+    <div class=" panel panel-danger">
+        <div class="panel-heading panel-head">
+            Eliminar Ticketera</div>
+        <div class="panel-body">
+            <h3>¿Está seguro que quiere eliminar el siguiente registro?</h3>
+                <form class="form-horizontal" ng-init="ticketera.detailInit(tab)" method="post" ng-submit="ticketera.remove(tab, ticketera.item)">
+                    <div class="form-group">
+                <label class="col-sm-2 control-label">
+                    Código</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static">
+                        {{ticketera.item.Id}}</p>
+                </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">
+                        Punto</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static">
+                            {{ticketera.item.Punto.Descripcion}}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">
+                        Descripcion</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static">
+                            {{ticketera.item.Descripcion}}</p>
+                    </div>
+                </div>
+                
+                    <div class="text-right">
+                        <a class="btn btn-default" ng-click="ticketera.volver(tab)">Cancelar</a>
+                        <button type="submit" class="btn btn-danger">
+                            Eliminar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

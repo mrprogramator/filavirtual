@@ -1,0 +1,81 @@
+﻿@model SistemaDeGestionDeFilas.Areas.FilaVirtual.Models.Ticket
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <link href="~/Resources/bootstrap-3.3.5-dist/css/bootstrap.css" rel="stylesheet" type="text/css" />
+        <link href="~/Resources/css/ticketera.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <style>
+            .form-control-static-xs 
+            {
+                margin-top:-5px;
+                padding-top:0px;
+            }
+        </style>
+        <div style="margin-top:5px">
+        <div class="row">
+            <div class="text-center">
+                <img src="~/Resources/img/Cotas-Ltda-.jpg" style="width:50%"/>
+            </div>
+            <!--div style="margin-top:20px; margin-bottom:30px">
+                <h6><b>
+                    <p class="text-center">Cooperativa de Telecomunicaciones Santa Cruz</p>
+                    <p>Teléfonos: (591) 336000</p>
+                    <p>Fax: (591) 3361636</p>
+                    <p>Web: http://www.cotas.com</p>
+               </b></h6>
+            </div-->
+        </div>
+        <p class="row" style="margin-top:10px">
+            <form>
+                <p>
+                    <h6>
+                        <b>Servicio:</b>
+                        <p>
+                            @Model.Servicio
+                        </p>
+                    </h6>
+                </p>
+                <p>
+                    <p>
+                    <h6 style="margin-top:-5px" class="text-center"><b>NRO. Ticket:</b></h6>
+                    <p>
+                    <p>
+                        <h1  class="text-center" style="margin-top:-15px" >@Model.Turno</h1>
+                    </p>
+                </p>
+                <p>
+                    <h6 style="margin-top:-5px">
+                        <b>Fecha y Hora:</b>
+                        <p>
+                            @Model.FechaHora
+                        </p>
+                    </h6>
+                </p>
+                    <h6 style="margin-top:-5px">
+                        <b>Lugar:</b>
+                        <p>
+                            @Model.Lugar
+                        </p>
+                    </h6>
+            </form>
+            <div class="footer" style="margin-top:-5px">
+                <h6>@Model.Mensaje</h6>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.blur();
+        window.onload = function () {
+            window.blur();
+            self.print();
+            setTimeout(window.close, 1000)
+        };
+    </script>
+
+    </body>
+
+    
+</html>

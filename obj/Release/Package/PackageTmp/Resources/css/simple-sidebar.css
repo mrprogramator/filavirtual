@@ -1,0 +1,253 @@
+/*!
+ * Start Bootstrap - Simple Sidebar HTML Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+/* Toggle Styles */
+
+#content
+{
+    margin: 80px auto;
+}
+.tab
+{
+    color:#999999;
+}
+body
+{
+    height: 100%;
+}
+
+#csel
+{
+    width: 200px;
+    height: 200px;
+}
+
+#navbar-header
+{
+    padding-right: 0px;
+}
+
+#menu-toggle
+{
+    background-color: #F8F8F8;
+}
+
+#navbar-container
+{
+    padding-left: -800px;
+}
+
+
+#navbar-toggle
+{
+    background-color: #F8F8F8;
+}
+
+#side
+{
+    padding-top: 50px;
+}
+
+#footer
+{
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
+}
+#main
+{
+    background: #FFF;
+}
+
+.page-footer
+{
+    padding-top: 40px;
+    padding-bottom: 40px;
+    color: #767676;
+    border-top: 1px solid #e5e5e5;
+    text-align: center;
+}
+
+.page-footer p
+{
+    margin-bottom: 0;
+}
+
+#wrapper
+{
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+.tab-view
+{
+    padding-top: 50px;
+}
+
+#wrapper.toggled
+{
+    padding-left: 250px;
+}
+
+#sidebar-wrapper
+{
+    z-index: 1000;
+    position: fixed;
+    left: 250px;
+    width: 0;
+    height: 100%;
+    margin-left: -250px;
+    overflow-y: auto;
+    background: #F8F8F8;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled #sidebar-wrapper
+{
+    width: 250px;
+}
+
+#page-content-wrapper
+{
+    width: 100%;
+    heigth: 100%;
+}
+
+#wrapper.toggled #page-content-wrapper
+{
+    position: relative;
+    margin-right: -250px;
+}
+
+/* Sidebar Styles */
+
+.sidebar-nav
+{
+    position: absolute;
+    top: 50px;
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar-nav li
+{
+    text-indent: 20px;
+    line-height: 40px;
+}
+
+.sidebar-nav li a
+{
+    display: block;
+    text-decoration: none;
+    color: #999999;
+}
+
+.sidebar-nav li a:hover
+{
+    text-decoration: none;
+    color: #000;
+    background: rgba(0,98,210,0.3);
+}
+
+.sidebar-nav li a:active, .sidebar-nav li a:focus
+{
+    text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand
+{
+    height: 65px;
+    font-size: 18px;
+    line-height: 60px;
+}
+
+.sidebar-nav > .sidebar-brand a
+{
+    color: #999999;
+}
+
+.sidebar-nav > .sidebar-brand a:hover
+{
+    color: #000;
+    background: rgba(0,98,210,0.3);
+}
+
+@media (min-width:768px)
+{
+    #wrapper
+    {
+        padding-left: 250px;
+    }
+
+    #wrapper.toggled
+    {
+        padding-left: 0;
+    }
+
+    #sidebar-wrapper
+    {
+        width: 250px;
+    }
+
+    #wrapper.toggled #sidebar-wrapper
+    {
+        width: 0;
+    }
+
+    #page-content-wrapper
+    {
+        padding: 0px;
+        position: absolute;
+    }
+
+    #wrapper.toggled #page-content-wrapper
+    {
+        position: relative;
+        margin-right: 0;
+    }
+}
+
+@media (max-width:768px)
+{
+    #wrapper
+    {
+        padding-left: 0px;
+    }
+
+    #wrapper.toggled
+    {
+        padding-left: 0;
+    }
+
+    #sidebar-wrapper
+    {
+        width: 250px;
+    }
+
+    #wrapper.toggled #sidebar-wrapper
+    {
+        width: 0;
+    }
+
+    #page-content-wrapper
+    {
+        padding: 0px;
+        position: absolute;
+    }
+
+    #wrapper.toggled #page-content-wrapper
+    {
+        position: relative;
+        margin-right: 250px;
+    }
+}

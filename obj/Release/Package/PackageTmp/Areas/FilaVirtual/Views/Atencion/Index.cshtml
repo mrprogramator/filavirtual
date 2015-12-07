@@ -1,0 +1,119 @@
+﻿<link href="~/Resources/datetimepicker/css/datetimepicker.css" rel="stylesheet"
+    type="text/css" />
+<div ng-controller="AtencionController as atencion">
+    <div>
+        <a class="btn btn-md btn-info pull-right" target="_blank" href="filavirtual/atenciones/exportar/?ajax=1">Exportar Atenciones</a>
+    </div>
+    <h2 class="page-header" ng-click="atencion.init()">
+        Atenciones
+    </h2>
+    <div class="panel panel-default with-table" ng-init="atencion.init()">
+    
+        <div class="panel-heading" style="max-height:50px;padding-left:40px">
+            <div class="row">
+                <form class='col-xs-2 col-sm-2 col-md-2 form-horizontal'>
+                    <div class="form-group">
+                        <div class='col-sm-11 input-group input-group-sm date'>
+                            <input id="dTPInicio" type='text' class="form-control input-sm" placeholder="Inicio"/>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                        <div class="col-sm-1"></div>
+                    </div>
+                </form>
+                <form class='col-xs-2 col-sm-2 col-md-2 form-horizontal'>
+                    <div class="form-group">
+                        <div class='col-sm-11 input-group date'>
+                            <input id="dTPFin" type='text' class="form-control input-sm" placeholder="Fin"/>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                        <div class="col-sm-1"></div>
+                    </div>
+                </form>
+                <form class="col-xs-2 col-sm-2 col-md-2 form-horizontal">
+                    <input id="nroAgente" class="form-control input-sm" placeholder="# Mesa">
+                </form>
+                <form class="col-xs-2 col-sm-2 col-md-2 form-horizontal">
+                    <input id="nroTicket" class="form-control input-sm" placeholder="# Ticket">
+                </form>
+                <form class="col-xs-2 col-sm-2 col-md-2">
+                    <button ng-click="atencion.search()" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-search" style="margin-right:5px"></span>Buscar</button>
+                </form>
+            
+            </div>
+        </div>
+        <table class="table" style="margin: 4px">
+            <tr>
+                <th>
+                    Usuario
+                </th>
+                <th>
+                    Ticket
+                </th>
+                <th>
+                    Fecha
+                </th>
+                <th class="hidden-xs">
+                    Estado
+                </th>
+                <th>
+                </th>
+            </tr>
+            <tr ng-if="atencion.loading">
+                <td>
+                    Obteniendo datos...
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+            </tr>
+            <tr ng-if="atencion.items.length==0 && !atencion.loading">
+                <td>
+                    No hay registros
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+            </tr>
+            <tr ng-repeat="item in atencion.items">
+                <td>
+                    {{item.LogUsr}}
+                </td>
+                <td>
+                    {{item.NroTicket}}
+                </td>
+                <td>
+                    {{ item.FechaLlamado | date:'dd/MM/yyyy h:mm a' }}
+                </td>
+                <td class="hidden-xs">
+                    {{item.EstadoValor}}
+                </td>
+                <td>
+                </td>
+                <td class=" text-right col-md-4 col-lg-4 col-xs-4">
+                    <a ng-click="atencion.detail(tab, item.Id)" class="btn btn-xs btn-default" data-ajax>
+                        <span class="glyphicon glyphicon-eye-open"></span>
+                        <text class="hidden-xs">Detalles</text>
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<script src="~/Resources/datetimepicker/js/moment.js" type="text/javascript"></script>
+<script src="~/Resources/datetimepicker/js/datetimepicker.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        $('.date').datetimepicker({
+            format: 'DD/MM/YYYY',
+            locale: 'es'
+        });
+    });
+</script>

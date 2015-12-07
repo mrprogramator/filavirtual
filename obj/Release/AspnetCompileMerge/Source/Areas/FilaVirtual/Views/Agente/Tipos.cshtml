@@ -1,0 +1,92 @@
+﻿@{
+    ViewBag.Title = "Tipos de Atenciones de ";
+}
+
+<div ng-controller="MesaTiposController as tipomesa" ng-init="tipomesa.init(tab)">
+    <h2 class="page-header">
+        Tipos de atenciones de la mesa {{tipomesa.item.Id}}
+    </h2>
+    <div ng-show="tipomesa.response.result == false" class="alert alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      
+      <h4 class="title">Error</h4>
+      <p>{{tipomesa.response.value}}</p>
+    </div>
+    <div class="panel panel-default with-table">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-4 col-xs-4 col-lg-4">
+                    <a class="btn btn-primary btn-sm" ng-click="tipomesa.goBack(tab, tipomesa.item.Id)">
+                        <span class="glyphicon glyphicon-level-up"></span>
+                        Volver 
+                    </a>
+                </div>
+                <div class="col-md-4 col-xs-8 col-lg-4">
+                    <div class="input-group input-group-sm hidden-xs">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="table">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th class="col-md-4 col-lg-4">
+                            Nombre
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                        <tr ng-hide="tipomesa.items.length">
+                            <td colspan="3">
+                                No hay registros.
+                            </td>
+                            <td></td>
+
+                        </tr>
+                        <tr ng-repeat="tm in tipomesa.items">
+                            <td class="col-sm-4 col-md-4 col-lg-4">
+                                {{tm.Tipo.Nombre}}
+                            </td>
+                            <td class="text-right col-md-4 col-lg-4 col-xs-4">
+                                <a  ng-click="tipomesa.removeTipoFromMesa(tm)" class="btn btn-xs btn-default" data-ajax>
+                                    <span class="glyphicon glyphicon-arrow-down"></span>
+                                    <text class="hidden-xs">Remover</text>
+                                </a>
+                            </td>
+                        </tr>
+                </tbody>
+            </table>
+            
+        </div>
+        
+    </div>
+
+    <h3 ng-show="tipomesa.tipos.length" class="page-header">Tipos de atención excluidos</h3>
+    <div class="panel panel-default with-table" ng-show="tipomesa.tipos.length">
+        <table class="table" style="margin: 4px" >
+            <tr>
+                <th>
+                    Nombre
+                </th>
+                <th>
+                </th>
+            </tr>
+                <tr ng-repeat="tipo in tipomesa.tipos">
+                    <td>
+                        {{tipo.Nombre}}
+                    </td>
+                    <td class=" text-right col-md-4 col-lg-4 col-xs-4">
+                           
+                        <a  ng-click="tipomesa.addTipoToMesa(tipomesa.item, tipo)" class="btn btn-xs btn-default" data-ajax>
+                            <span class="glyphicon glyphicon-arrow-up"></span>
+                            <text class="hidden-xs">Agregar</text>
+                        </a>
+                    </td>
+                </tr>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,113 @@
+﻿.ticketera-panel
+{
+    margin: 80px auto;
+    max-width:760px;
+}
+
+.ticketera-container
+{
+     background-color:#004E91;
+     color:White;
+}
+
+.btn-div
+{
+    background: repeating-radial-gradient(gray, white);
+    border-radius: 10px;
+    margin: 10px 30px;
+}
+
+.ticketera-panel-xs
+{
+    margin: 80px auto;
+    max-width:580px;
+}
+
+::-webkit-scrollbar { 
+    /*display: none;*/ 
+}
+
+.even .btn 
+{
+    color:#fff;
+    background-color:#337ab7;
+    border-color:#2e6da4;
+}
+.odd .btn
+{
+    color:#fff;
+    background-color:#d9534f;
+    border-color:#d43f3a
+}
+.btn-bordered
+{
+    border-radius: 10px;
+    padding: 20px;
+    border: 10px solid #eee;
+}
+.border-div
+{
+    border-radius: 10px;
+    padding: 20px;
+    border: 1px solid #eee;
+}
+
+.footer
+{
+    text-align: center;
+    color: #767676;
+    border-top: 1px solid #e5e5e5;
+    width: 100%;
+}
+
+@media screen and (max-width: 600px)
+{
+    .btn-tick
+    {
+        width:100%;
+    }
+    .btn-tick-right
+    {
+    }
+    .btn-tick-left
+    {
+    }
+}
+
+
+.btn-tick
+{
+    white-space:normal;
+    font-size: 2.1em;
+    width:100%;
+}
+
+.btn-tick-xs
+{
+    white-space:normal;
+    font-size: 1.0em;
+    width:100%;
+}
+
+
+@media screen and (min-width: 600px)
+{
+    
+    .btn-tick-right
+    {
+        float:right;
+    }
+    .btn-tick-left
+    {
+        float:left;
+    }
+}
+@media screen and (max-width: 500px)
+{
+    
+    btn-tick
+    {
+        width:300%;
+    }
+}
+

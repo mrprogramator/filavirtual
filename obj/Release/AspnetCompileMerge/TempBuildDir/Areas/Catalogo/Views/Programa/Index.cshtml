@@ -1,0 +1,72 @@
+﻿<h2 class="page-header">
+    Programas
+</h2>
+<div class="panel panel-default with-table" ng-controller="ProgramaController as programa">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-md-8">
+                <a class="btn btn-primary btn-sm" ng-click="programa.create(tab)">
+                <span class="glyphicon glyphicon-file"></span>Nuevo </a>
+            </div>
+            <div class="col-md-4">
+            </div>
+        </div>
+    </div>
+
+    <table class="table" style="margin: 4px">
+        <tr>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Estado
+            </th>
+            <th>
+            </th>
+        </tr>
+        <tr ng-if="programa.loading">
+            <th>
+                Obteniendo datos...
+            </th>
+            <th>
+            </th>
+            <th>
+            </th>
+        </tr>
+        <tr ng-if="programa.loading && programa.items.length == 0">
+            <th>
+                No hay registros
+            </th>
+            <th>
+            </th>
+            <th>
+            </th>
+        </tr>
+            <tr ng-repeat="item in programa.items">
+                <td>
+                    {{item.Nombre}}
+                </td>
+                <td>
+                    {{item.Estado.Nombre}}
+                </td>
+                <td class=" text-right col-md-4 col-lg-4 col-xs-4">
+                    
+                    
+                    <a  ng-click="programa.detail(tab, item.Id)" class="btn btn-xs btn-default" data-ajax>
+                        <span class="glyphicon glyphicon-eye-open"></span>
+                        <text class="hidden-xs">Detalles</text>
+                    </a>
+                    
+                    <a  ng-click="programa.edit(tab, item.Id)" class="btn btn-xs btn-default" data-ajax>
+                        <span class="glyphicon glyphicon-pencil"></span>
+                        <text class="hidden-xs">Modificar</text>
+                    </a>
+                            
+                    <a ng-click="programa.delete(tab, item.Id)" class="btn btn-xs btn-default " data-ajax>
+                        <span class="glyphicon glyphicon-remove"></span>
+                        <text class="hidden-xs">Eliminar</text>
+                    </a>
+                </td>
+            </tr>
+    </table>
+</div> 

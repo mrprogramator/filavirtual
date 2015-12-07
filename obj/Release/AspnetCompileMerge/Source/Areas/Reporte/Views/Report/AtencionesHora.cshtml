@@ -1,0 +1,7 @@
+﻿<div class="container" ng-controller="ReporteController">
+    <h2 class="page-header">Reporte de Atenciones por hora</h2>
+    <div id="test" style="width:100%">
+    </div>
+    <div class="alert alert-info" ng-if="loading" style="width:100%">Obteniendo datos...</div>
+    <div class="alert alert-default" ng-if="!response.result" style="width:100%">{{response.value}}</div>
+</div>

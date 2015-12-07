@@ -1,0 +1,81 @@
+﻿<div ng-controller="TipoAtencionController as tipoAtencion">
+    <h2 class="page-header">
+        Parámetros
+    </h2>
+    <div class="col-md-4">
+        <div class="panel panel-default with-table">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-md-8">
+                        <a class="btn btn-primary btn-sm" ng-click="tipoAtencion.create(tab)">
+                        <span class="glyphicon glyphicon-file"></span>Nuevo </a>
+                    </div>
+                    <div class="col-md-4">
+                    </div>
+                </div>
+            </div>
+            <div class="table">
+                <abn-tree ng-if="!tipoAtencion.loading" tree-data="tipoAtencion.data" expand-level="1" 
+                    on-select="tipoAtencion.selectedBranch = branch" ng-click="tipoAtencion.handleClick()">
+                </abn-tree>
+            </div>
+        
+        </div>
+        <div class="text-right">
+            <a ng-click="tipoAtencion.detail(tab, tipoAtencion.selectedBranch.id)" class="btn btn-xs btn-default"
+                data-ajax><span class="glyphicon glyphicon-eye-open"></span>
+                <text class="hidden-xs">Detalles</text>
+            </a>
+            <a ng-click="tipoAtencion.edit(tab, tipoAtencion.selectedBranch.id)" class="btn btn-xs btn-default"
+                data-ajax><span class="glyphicon glyphicon-pencil"></span>
+                <text class="hidden-xs">Modificar</text>
+            </a>
+            <a ng-click="tipoAtencion.delete(tab, tipoAtencion.selectedBranch.id)" class="btn btn-xs btn-default "
+                data-ajax><span class="glyphicon glyphicon-remove"></span>
+                <text class="hidden-xs">Eliminar</text>
+            </a>
+        </div> 
+    </div>
+    <div class="col-md-8" ng-if="tipoAtencion.selectedBranch.children.length > 0">
+        <table class="table">
+            <tr>
+                <th>
+                    Parámetros de {{tipoAtencion.selectedBranch.label}}
+                </th>
+                <th>
+                </th>
+            </tr>
+            <tr ng-if="tipoAtencion.loading">
+                <td>Obteniendo datos</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr ng-if="tipoAtencion.selectedBranch.children.length==0">
+                <td>No hay registros</td>
+                <td></td>
+                <td></td>
+            </tr>
+                <tr ng-repeat="item in tipoAtencion.selectedBranch.children">
+                    <td>
+                        {{item.label}}
+                    </td>
+                     <td class=" text-right">
+                        <a  ng-click="tipoAtencion.detail(tab, item.id)" class="btn btn-xs btn-default" data-ajax>
+                            <span class="glyphicon glyphicon-eye-open"></span>
+                            <text class="hidden-xs">Detalles</text>
+                        </a>
+                    
+                        <a  ng-click="tipoAtencion.edit(tab, item.id)" class="btn btn-xs btn-default" data-ajax>
+                            <span class="glyphicon glyphicon-pencil"></span>
+                            <text class="hidden-xs">Modificar</text>
+                        </a>
+                            
+                        <a ng-click="tipoAtencion.delete(tab, item.id)" class="btn btn-xs btn-default " data-ajax>
+                            <span class="glyphicon glyphicon-remove"></span>
+                            <text class="hidden-xs">Eliminar</text>
+                        </a>
+                    </td>
+                </tr>
+        </table>
+    </div>
+</div>

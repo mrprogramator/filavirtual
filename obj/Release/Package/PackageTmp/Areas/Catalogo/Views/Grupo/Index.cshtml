@@ -1,0 +1,63 @@
+﻿<h2 class="page-header">
+    Grupos
+</h2>
+<div class="panel panel-default with-table" ng-controller="GrupoController as grupo">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-md-8">
+                <a class="btn btn-primary btn-sm" ng-click="grupo.create(tab)">
+                <span class="glyphicon glyphicon-file"></span>Nuevo </a>
+            </div>
+            <div class="col-md-4">
+            </div>
+        </div>
+    </div>
+
+    <table class="table" style="margin: 4px">
+        <tr>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Estado
+            </th>
+            <th>
+            </th>
+        </tr>
+        <tr ng-if="grupo.loading">
+            <td>Obteniendo datos...</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr ng-show="!grupo.items.length && !grupo.loading">
+            <td>No hay registros</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr ng-repeat="item in grupo.items">
+            <td>
+                {{item.Nombre}}
+            </td>
+            <td>
+                {{item.Estado.Nombre}}
+            </td>
+            <td class=" text-right col-md-4 col-lg-4 col-xs-4">
+                           
+                <a  ng-click="grupo.detail(tab, item.Id)" class="btn btn-xs btn-default" data-ajax>
+                    <span class="glyphicon glyphicon-eye-open"></span>
+                    <text class="hidden-xs">Detalles</text>
+                </a>
+                    
+                <a  ng-click="grupo.edit(tab, item.Id)" class="btn btn-xs btn-default" data-ajax>
+                    <span class="glyphicon glyphicon-pencil"></span>
+                    <text class="hidden-xs">Modificar</text>
+                </a>
+                            
+                <a ng-click="grupo.delete(tab, item.Id)" class="btn btn-xs btn-default " data-ajax>
+                    <span class="glyphicon glyphicon-remove"></span>
+                    <text class="hidden-xs">Eliminar</text>
+                </a>
+            </td>
+        </tr>
+    </table>
+</div> 

@@ -1,0 +1,26 @@
+﻿@{
+    if (Request.IsAjaxRequest() || !String.IsNullOrEmpty(Request["ajax"]))
+    {
+        Layout = null;
+    }
+    else
+    {
+        Layout = "_Layout.cshtml";
+    }
+    
+    var pre = ViewBag.GridPrefix ?? "md";
+    
+    var cols = ViewBag.LayoutColumns ?? 6;
+    
+    if (cols % 2 == 1) { throw new Exception("ViewBag.LayoutColumns is not even."); }
+    
+    var offset = (12 - cols) / 2;
+}
+
+<div class="row">
+  <div class="col-@pre-offset-@offset col-@pre-@cols">
+    
+    @RenderBody()
+    
+  </div>
+</div>

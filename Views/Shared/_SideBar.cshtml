@@ -1,0 +1,9 @@
+﻿<div id="sidebar-wrapper" style="padding-top: 50px; height:100%" ng-controller="TreeviewController as treeview">
+    <h3 class="page-header" style="padding-left: 20px">
+        Programas</h3>
+    <div class="alert alert-info" ng-if="treeview.loading">
+            Cargando...
+    </div>
+    <abn-tree ng-if="!treeview.loading" tree-data="treeview.data" on-select="treeview.selectedBranch = branch"
+        ng-click="treeview.handleClick(tabctrl)" expand-level="3" initial-selection="Fila Virtual"></abn-tree>
+</div>

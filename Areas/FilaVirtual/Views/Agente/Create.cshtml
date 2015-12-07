@@ -1,0 +1,62 @@
+﻿@{
+    Layout = "~/Views/Shared/_CenteredLayout.cshtml";
+
+    ViewBag.Title = "Nueva Mesa";
+}
+<h2 class="page-header">
+    @ViewBag.Title
+</h2>
+<div class="entity-editor" ng-controller="AgenteController as agente">
+    <div ng-show="agente.response.result == false" class="alert alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      
+      <h4 class="title">Error</h4>
+      <p>{{agente.response.value}}</p>
+    </div>
+    <form name="myForm" method="POST" ng-submit="agente.save(tab, item)" novalidate>
+    <div class="form-group" ng-class="{'has-error': myForm.Codigo.$dirty && myForm.Codigo.$invalid, 'has-success': myForm.Codigo.$dirty && myForm.Codigo.$valid }">
+        <label class="control-label">Código</label>
+        <input name="Codigo" class="form-control" ng-model="item.Id" required/>
+        <p class="help-block" ng-if="myForm.Codigo.$dirty && myForm.Codigo.$error.required">
+            Campo requerido
+        </p>
+    </div>
+    <div class="form-group"  ng-class="{'has-error': myForm.PuntoId.$dirty && myForm.PuntoId.$invalid, 'has-success': myForm.PuntoId.$dirty && myForm.PuntoId.$valid }">
+        <label class="control-label">
+            Punto</label>
+        <select name="PuntoId" class="form-control" ng-model="item.PuntoId" required>
+            <option ng-selected="{{punto.Id == item.PuntoId }}"
+                    ng-repeat="punto in agente.puntos"
+                    value="{{punto.Id}}">
+                {{punto.Descripcion}}
+            </option>
+        </select>
+        <p class="help-block" ng-if="myForm.PuntoId.$dirty && myForm.PuntoId.$error.required">
+            Campo requerido
+        </p>
+    </div>
+    <div class="form-group" ng-class="{'has-error': myForm.LogUsr.$dirty && myForm.LogUsr.$invalid, 'has-success': myForm.LogUsr.$dirty && myForm.LogUsr.$valid }">
+        <label class="control-label">
+            Usuario</label>
+        <select name="LogUsr" class="form-control" ng-model="item.LogUsr">
+            <option ng-selected="{{usuario.Id == item.LogUsr }}"
+                    ng-repeat="usuario in agente.usuarios"
+                    value="{{usuario.Id}}">
+                {{usuario.Id}}
+            </option>
+            <option></option>
+        </select>
+        <p class="help-block" ng-if="myForm.LogUsr.$dirty && myForm.LogUsr.$error.required">
+            Campo requerido
+        </p>
+    </div>
+    <div class="text-right">
+        <a href="#" ng-click="agente.volver(tab)" class="btn btn-link">
+            Cancelar</a>
+        <button type="submit" class="btn btn-primary" ng-disabled="myForm.$invalid || !myForm.$dirty">
+            Guardar</button>
+    </div>
+    </form>
+</div>

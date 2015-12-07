@@ -1,0 +1,156 @@
+﻿<!DOCTYPE html>
+<html ng-app="CatalogoApp">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Fila Virtual</title>
+
+    <script>
+        var APP_URL = "@Url.Content("~/")";
+    
+        var appUrl = window.location.origin;
+
+        
+        function downloadOperator(name) {
+            console.log('APP_URL', APP_URL);
+
+            if (APP_URL == "/") {
+                window.open(appUrl + "/operador/" + name + "/download", "_blank");
+                return;
+            }
+            window.open(APP_URL + "/operador/" + name + "/download", "_blank");
+        }
+    </script>
+    
+    <link href="~/Resources/bootstrap-3.3.5-dist/css/bootstrap.css" rel="stylesheet"
+        type="text/css" />
+    @if (Context.User.Identity.IsAuthenticated)
+    {
+        <link href="~/Resources/css/tabs.css" rel="stylesheet" type="text/css"/>
+        <link href="~/Resources/css/simple-sidebar.css" rel="stylesheet" type="text/css" />
+    }
+    <link href="~/Resources/js/ng-bootstrap.treeview/dist/abn_tree.css" rel="stylesheet" type="text/css" />
+    <link href="~/Resources/css/treeview.css" rel="stylesheet" type="text/css" />
+    <link href="~/Resources/css/special-glyphicons.css" rel="stylesheet" type="text/css" />
+    <link href="~/Resources/css/ticketera.css" rel="stylesheet" type="text/css" />
+    
+    <link href="~/Resources/metrics-graphics/metricsgraphics.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/kendo/ReportViewer-8.0.14.507.css" rel="stylesheet" />
+
+    <script src="~/Resources/js/jquery-2.1.4.js" type="text/javascript"></script>
+    <script src="~/Resources/bootstrap-3.3.5-dist/js/bootstrap.js" type="text/javascript"></script>
+    <script src="~/Resources/js/angular.js" type="text/javascript"></script>
+    <script src="~/Resources/js/angular-animate.js" type="text/javascript"></script>
+    <script src="~/Resources/js/angular-ui/ui-bootstrap-tpls.js" type="text/javascript"></script>
+    <style>
+        .jumbotron 
+        {
+            background-color:#f8f8f8;
+        }
+    </style>
+    <script src="~/Resources/operador/js/jquery.signalR-2.2.0.js"></script>
+    <script src="~/signalr/hubs" type="text/javascript"></script>
+</head>
+<body ng-controller="TabsController as tabctrl">
+    <div class="row" >
+        @Html.Partial("_NavBar")
+    </div>
+     @if (!User.Identity.IsAuthenticated)
+        {
+               <div class="row col-xs-12 col-md-12 col-sm-8 col-lg-8">
+                @RenderBody()
+                </div>     
+                <div class="col-xs-12 col-sm-12 hidden-lg">
+                    <div class="jumbotron">
+                        <div class="container text-center">
+                            <h2>Módulo Operador</h2>
+                            <div class="text-center">
+                                <img style="max-height:120px; margin:15px" src="~/Resources/img/electron.png" />
+                                <h4>Descargue el Módulo del Operador para llevar el control de sus atenciones:</h4>
+                                <p><a class="btn btn-link btn-lg" onclick="downloadOperator('operador-win-32bits')" role="button">Descargar para Windows 7/8/10</a></p>
+                                <!--p><a class="btn btn-link btn-lg" onclick="downloadOperator('operador-win-64bits')" role="button">Descargar para Windows 64 bits</a></p>
+                                <p><a class="btn btn-link btn-lg" onclick="downloadOperator('operador-linux-32bits')" role="button">Descargar para Linux 32 bits</a></p>
+                                <p><a class="btn btn-link btn-lg" onclick="downloadOperator('operador-linux-64bits')" role="button">Descargar para Linux 64 bits</a></p-->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="jumbotron hidden-xs hidden-sm hidden-md" style="position:absolute;top:45px;right:0px; max-width:400px; height:100%">
+                        <div class="container text-center">
+                            <h2>Módulo Operador</h2>
+                            <div class="text-center">
+                                <img style="max-height:120px; margin:15px" src="~/Resources/img/electron.png" />
+                                <h4>Descargue el Módulo del Operador para llevar el control de sus atenciones:</h4>
+                                <p><a class="btn btn-link btn-lg" onclick="downloadOperator('operador-win-32bits')" role="button">Descargar para Windows 7/8/10</a></p>
+                                <!--p><a class="btn btn-link btn-lg" onclick="downloadOperator('operador-win-64bits')" role="button">Descargar para Windows 64 bits</a></p>
+                                <p><a class="btn btn-link btn-lg" onclick="downloadOperator('operador-linux-32bits')" role="button">Descargar para Linux 32 bits</a></p>
+                                <p><a class="btn btn-link btn-lg" onclick="downloadOperator('operador-linux-64bits')" role="button">Descargar para Linux 64 bits</a></p-->
+
+                            </div>
+                        </div>
+                </div>
+            
+            
+        }
+    <div id="wrapper">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div>
+                @Html.Partial("_SideBar")
+            </div>
+        }
+       
+        <div class="row">
+            <div class="alert alert-info text-center" ng-show="::false" style="margin-top: 60px; padding-left: 15px">
+                Cargando...
+            </div>
+        </div>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div class="row" ng-cloak>
+                @RenderBody()
+            </div> 
+        }
+        
+    </div>
+    <script src="~/Resources/js/angular-modules/reportes/main.js"></script>
+    <script src="~/Resources/js/angular-modules/reportes/transacciones-parametrica.js"></script>
+    <script src="~/Resources/js/angular-modules/reportes/atenciones-operador.js"></script>
+    <script src="~/Resources/js/angular-modules/reportes/tiempo-operador.js"></script>
+    <script src="~/Resources/js/angular-modules/reportes/ausencia-operador.js"></script>
+    <script src="~/Resources/js/full-url.js" type="text/javascript"></script>
+    <script src="~/Resources/js/validator.min.js" type="text/javascript"></script>
+    <script src="~/Resources/js/sidebar-toggle.js" type="text/javascript"></script>
+    <script src="~/Resources/js/angular-modules/tabs.js" type="text/javascript"></script>
+    <script src="~/Resources/js/ng-bootstrap.treeview/dist/abn_tree_directive.js" type="text/javascript"></script>
+    <script src="~/Resources/js/ng-bootstrap.treeview/dist/abn_tree_btn_directive.js" type="text/javascript"></script>
+    <script src="~/Resources/js/angular-modules/treeview.js" type="text/javascript"></script>
+    <script src="~/Resources/js/angular-modules/routing.js" type="text/javascript"></script>
+    <script src="~/Resources/js/angular-modules/usuario.js" type="text/javascript"></script>
+    <script src="~/Resources/js/angular-modules/grupo.js" type="text/javascript"></script>
+    <script src="~/Resources/js/angular-modules/programa.js" type="text/javascript"></script>
+    <script src="~/Resources/js/angular-modules/acceso.js" type="text/javascript"></script>
+    <script src="~/Resources/js/angular-modules/accesogrupo.js" type="text/javascript"></script>
+    <script src="~/Resources/js/angular-modules/usuariogrupos.js" type="text/javascript"></script>
+    <script src="~/Resources/js/angular-modules/grupousuarios.js" type="text/javascript"></script>
+    <script src="~/Resources/js/angular-modules/login.js" type="text/javascript"></script>
+    <script src="~/Resources/js/ticketera-request.js" type="text/javascript"></script>
+    <script src="~/Resources/js/ticketera-builder.js" type="text/javascript"></script>
+    <script src="~/Resources/js/angular-modules/ticketera.js" type="text/javascript"></script>
+    <script src="~/Resources/js/angular-modules/confticketera.js" type="text/javascript"></script>
+    <script src="~/Resources/js/angular-modules/agente.js" type="text/javascript"></script>
+    <script src="~/Resources/js/angular-modules/atencion.js" type="text/javascript"></script>
+    <script src="~/Resources/js/angular-modules/atencion-psql.js" type="text/javascript"></script>
+    <script src="~/Resources/js/angular-modules/parametro.js" type="text/javascript"></script>
+    <script src="~/Resources/js/angular-modules/punto.js" type="text/javascript"></script>
+    <script src="~/Resources/js/angular-modules/mesatipos.js" type="text/javascript"></script>
+    <script src="~/Resources/js/angular-modules/maquina.js" type="text/javascript"></script>
+    <script src="~/Resources/js/angular-modules/exportador-atenciones.js" type="text/javascript"></script>
+    <script src="~/Resources/js/angular-modules/monitoreo-mesas.js" type="text/javascript"></script>
+    <script src="~/Resources/metrics-graphics/d3.js" charset="utf-8"></script>
+    <script src="~/Resources/js/angular-modules/reporte.js" type="text/javascript"></script>
+    <script src="~/Resources/metrics-graphics/metricsgraphics.js" type="text/javascript"></script>
+    <script src="~/Scripts/kendo/ReportViewer-8.0.14.507.js"></script>
+    
+</body>
+</html>

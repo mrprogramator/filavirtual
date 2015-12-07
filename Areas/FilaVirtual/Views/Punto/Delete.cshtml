@@ -1,0 +1,71 @@
+﻿@model SistemaDeGestionDeFilas.Areas.FilaVirtual.Models.Punto
+@{
+    Layout = "~/Views/Shared/_CenteredLayout.cshtml";
+}
+<div ng-controller="PuntoController as punto">
+    <div ng-show="routing.response.result == false" class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="title">
+            Error</h4>
+        <p>{{routing.response.value}}</p>
+    </div>
+    <div class=" panel panel-danger">
+        <div class="panel-heading panel-head">
+            Eliminar Punto</div>
+        <div class="panel-body">
+            <h3>¿Está seguro que quiere eliminar el siguiente registro?</h3>
+                <form class="" ng-init="punto.detailInit(tab)" method="post" ng-submit="punto.remove(tab,punto.item.Id)">
+                    <div class="form-group">
+                        <label class="control-label">
+                            Código</label>
+                        <div class="">
+                            <p class="form-control-static">{{punto.item.Id}}</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">
+                            Descripción</label>
+                        <div class="">
+                            <p class="form-control-static">{{punto.item.Descripcion}}</p>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-if="punto.item.Mensaje1">
+                        <label class=" control-label">
+                            Mensaje 1 para el televisor</label>
+                        <div class="">
+                            <p class="form-control-static">{{punto.item.Mensaje1}}</p>
+                        </div>
+                    </div>
+                   <div class="form-group" ng-if="punto.item.Mensaje2">
+                        <label class=" control-label">
+                            Mensaje 2 para el televisor</label>
+                        <div class="">
+                            <p class="form-control-static">{{punto.item.Mensaje2}}</p>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-if="punto.item.Mensaje3">
+                        <label class="control-label">
+                            Mensaje para el ticket</label>
+                        <div class="">
+                            <p class="form-control-static">{{punto.item.Mensaje3}}</p>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-if="punto.item.OrdenAtencion">
+                        <label class="control-label">
+                            Orden de Atención</label>
+                        <div class="">
+                            <p class="form-control-static">Atender 1 ticket preferencial después de <strong>{{punto.item.OrdenAtencion}}</strong> tickets normales</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <a class="btn btn-default" ng-click="punto.volver(tab)">Cancelar</a>
+                        <button type="submit" class="btn btn-danger">
+                            Eliminar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,92 @@
+﻿@model String
+<div ng-controller="TicketeraController as ticketera">
+    @if (!String.IsNullOrEmpty(Model))
+    {
+        <div>
+            <a class="btn btn-default btn-sm" ng-click="ticketera.volver(tab)">
+                <span class="glyphicon glyphicon-arrow-left"></span>Volver </a>
+        </div>
+    }
+    <h2 ng-if="ticketera.punto" class="page-header">
+        Ticketeras del {{ticketera.punto.Descripcion}}
+    </h2>
+    <h2 ng-if="!ticketera.punto" class="page-header">
+        Ticketeras
+    </h2>
+    <div class="panel panel-default with-table" ng-init="ticketera.init(@Html.Raw(Json.Encode(Model)))">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-8">
+                    <a class="btn btn-primary btn-sm" ng-click="ticketera.create(tab)">
+                        <span class="glyphicon glyphicon-file"></span>Nuevo </a>
+                </div>
+                <div class="col-md-4">
+                </div>
+            </div>
+        </div>
+        <table class="table" style="margin: 4px">
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th class="hidden-xs">
+                    Descripción
+                </th>
+                <th class="hidden-xs">
+                    Punto
+                </th>
+                <th>
+                </th>
+                <th>
+                </th>
+            </tr>
+            <tr ng-if="ticketera.loading">
+                <td>
+                    Obteniendo datos...
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+            </tr>
+            <tr ng-show="!ticketera.items.length && !ticketera.loading">
+                <td>
+                    No hay registros
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+            </tr>
+            <tr ng-repeat="item in ticketera.items">
+                <td>
+                    {{item.Id}}
+                </td>
+                <td  class="hidden-xs">
+                    {{item.Descripcion}}
+                </td>
+                <td  class="hidden-xs">
+                    {{item.Punto.Descripcion}}
+                </td>
+                <td class=" text-right col-md-4 col-lg-4 col-xs-4">
+                    <a ng-click="ticketera.detail(tab, item)" class="btn btn-xs btn-default"
+                        data-ajax><span class="glyphicon glyphicon-eye-open"></span>
+                        <text class="hidden-xs">Detalles</text>
+                    </a>
+                    <a ng-click="ticketera.edit(tab, item)" class="btn btn-xs btn-default"
+                        data-ajax><span class="glyphicon glyphicon-pencil"></span>
+                        <text class="hidden-xs">Modificar</text>
+                    </a>
+                    <a ng-click="ticketera.delete(tab, item)" class="btn btn-xs btn-default "
+                        data-ajax><span class="glyphicon glyphicon-remove"></span>
+                        <text class="hidden-xs">Eliminar</text>
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

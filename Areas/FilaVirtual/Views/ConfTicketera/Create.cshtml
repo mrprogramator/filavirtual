@@ -1,0 +1,89 @@
+﻿@{
+    Layout = "~/Views/Shared/_CenteredLayout.cshtml";
+
+    ViewBag.Title = "Nueva Configuración";
+}
+
+<h2 class="page-header">
+    @ViewBag.Title
+</h2>
+<div class="entity-editor" ng-controller="ConfTicketeraController as config" ng-init="config.init(tab)">
+    <div ng-show="config.response.result == false" class="alert alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      
+      <h4 class="title">Error</h4>
+      <p>{{config.response.value}}</p>
+    </div>
+    <form id="identicalForm" method="POST" data-toggle="validator" ng-submit="config.save(tab, item)">
+    <div class="form-group ">
+        <label class="label-control">Descripcion</label>
+        <input class="form-control" ng-model="item.Descripcion" required/>
+        <div class="help-block with-errors">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="label-control">
+            Tipo</label>
+        <select class="form-control" ng-model="item.TipoId" required>
+            <option ng-selected="{{tipo.Id == item.TipoId || tipo == tipo }}"
+                    ng-repeat="tipo in config.tipos"
+                    value="{{tipo.Id}}">
+              {{tipo.Nombre}}
+            </option>
+        </select>
+    </div>
+    <div class="form-group"  ng-if="item.TipoId=='TICOPC'">
+        <label class="label-control">
+            Padre</label>
+        <select class="form-control" ng-model="item.PadreId" required>
+            <option ng-selected="{{padre == item.PadreId || padre == padre}}"
+                    ng-repeat="padre in config.ticketera.grupos"
+                    value="{{padre.Id}}">
+              {{padre.Descripcion}}
+            </option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label class="label-control">
+            Tipo de Atención</label>
+        <select class="form-control" ng-model="item.TipoAtencionId" required>
+            <option ng-if="item.TipoId!='TICOPC'" ng-selected="tipat.Id == item.TipoAtencionId"
+                    ng-repeat="tipat in config.tipoAtenciones"
+                    value="{{tipat.Id}}">
+              {{tipat.Nombre}}
+            </option>
+            <option ng-if="item.TipoId=='TICOPC'" ng-selected="tipoTicket.Id == item.TipoAtencionId"
+                    ng-repeat="tipoTicket in config.tiposTicket"
+                    value="{{tipoTicket.Id}}">
+              {{tipoTicket.Nombre}}
+            </option>
+        </select>
+    </div>
+    <div class="form-group ">
+        <label class="label-control">Prefijo</label>
+        <input class="form-control" ng-model="item.Prefijo" />
+        <div class="help-block with-errors">
+        </div>
+    </div>
+    <div class="form-group ">
+        <label class="label-control">Imagen</label>
+        <input class="form-control" ng-model="item.Imagen" />
+        <div class="help-block with-errors">
+        </div>
+        <div class="text-center">
+            <img ng-src="{{item.Imagen}}" style="height:60px; margin:auto">
+        </div>
+    </div>
+    <div class="text-right">
+        <a href="#" ng-click="config.volver(tab)" class="btn btn-link" data-ajax>
+            Cancelar</a>
+        <button type="submit" class="btn btn-primary">
+            Guardar</button>
+    </div>
+    </form>
+</div>
+<script type="text/javascript">
+    $('form[data-toggle="validator"]').validator();
+</script>

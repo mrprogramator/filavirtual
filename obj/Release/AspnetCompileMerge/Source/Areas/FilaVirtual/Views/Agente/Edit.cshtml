@@ -1,0 +1,53 @@
+﻿@model SistemaDeGestionDeFilas.Areas.FilaVirtual.Models.Agente
+@{
+    Layout = "~/Views/Shared/_CenteredLayout.cshtml";
+
+    ViewBag.Title = "Editar Mesa";
+}
+<h2 class="page-header">
+    @ViewBag.Title
+</h2>
+
+<div class="entity-editor" ng-controller="AgenteController as agente">
+    <div ng-show="agente.response.result == false" class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="title">
+            Error</h4>
+        <p>{{agente.response.value}}</p>
+    </div>
+    <form method="POST" ng-init="agente.detailInit(tab)" data-toggle="validator" ng-submit="agente.update(tab,agente.item)" data-ajax >
+        <div class="form-group">
+            <label class="label-control">
+                Punto</label>
+            <select class="form-control" ng-model="agente.item.PuntoId" required>
+                <option ng-selected="{{punto.Id == agente.item.PuntoId }}"
+                        ng-repeat="punto in agente.puntos"
+                        value="{{punto.Id}}">
+                    {{punto.Descripcion}}
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="label-control">
+                Usuario</label>
+            <select class="form-control" ng-model="agente.item.LogUsr">
+                <option ng-selected="{{usuario.Id == agente.item.LogUsr }}"
+                        ng-repeat="usuario in agente.usuarios"
+                        value="{{usuario.Id}}">
+                    {{usuario.Id}}
+                </option>
+                <option></option>
+            </select>
+        </div>
+        <div class="text-right">
+            <a ng-click="agente.volver(tab)" class="btn btn-link" data-ajax>Cancelar</a>
+            <button type="submit" class="btn btn-primary">
+                Guardar</button>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    $('form[data-toggle="validator"]').validator();
+</script>

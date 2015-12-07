@@ -1,0 +1,64 @@
+﻿@{
+    Layout = "~/Views/Shared/_CenteredLayout.cshtml";
+
+    ViewBag.Title = "Editar Parámetro";
+}
+<h2 class="page-header">
+    @ViewBag.Title
+</h2>
+
+<div ng-if="!tipoAtencion.loading" class="entity-editor" ng-controller="TipoAtencionController as tipoAtencion">
+    <div ng-show="tipoAtencion.response.result == false" class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="title">
+            Error</h4>
+        <p>{{tipoAtencion.response.value}}</p>
+    </div>
+    <form method="POST" ng-init="tipoAtencion.loadItem(tab)" ng-submit="tipoAtencion.update(tab,tipoAtencion.item)" data-ajax >
+        <div class="form-group ">
+            <label class="label-control">Nombre</label>
+            <input class="form-control" ng-model="tipoAtencion.item.Nombre" required/>
+            <div class="help-block with-errors">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="label-control">
+            Grupo</label>
+            <select class="form-control" ng-model="tipoAtencion.item.GrupoId">
+                <option ng-selected="padre.Id == tipoAtencion.item.GrupoId"
+                        ng-repeat="padre in tipoAtencion.items"
+                        value="{{padre.Id}}">
+                  {{padre.Nombre}}
+                </option>
+                <option></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="label-control">
+                Estado</label>
+            <select class="form-control" ng-model="tipoAtencion.item.EstadoId" required>
+                <option ng-selected="estado.Id == tipoAtencion.item.EstadoId"
+                        ng-repeat="estado in tipoAtencion.estados"
+                        value="{{estado.Id}}">
+                    {{estado.Nombre}}
+                </option>
+            </select>
+        </div>
+        <div class="form-group ">
+            <label class="label-control">Valor</label>
+            <input class="form-control" ng-model="tipoAtencion.item.Valor"/>
+            <div class="help-block with-errors">
+            </div>
+        </div>
+        <div class="text-right">
+            <a ng-click="tipoAtencion.index(tab)" class="btn btn-link" data-ajax>Cancelar</a>
+            <button type="submit" class="btn btn-primary">
+                Guardar</button>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    $('form[data-toggle="validator"]').validator();
+</script>

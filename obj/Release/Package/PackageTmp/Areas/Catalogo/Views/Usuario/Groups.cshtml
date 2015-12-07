@@ -1,0 +1,97 @@
+﻿@model SistemaDeGestionDeFilas.Areas.Catalogo.Models.Usuario
+@{
+    ViewBag.Title = "Grupos de " + Model.Email;
+}
+<h2 class="page-header">
+    @ViewBag.Title
+</h2>
+<div ng-controller="UsuarioGruposController as usuariogrupos">
+    <div ng-show="acceso.response.result == false" class="alert alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      
+      <h4 class="title">Error</h4>
+      <p>{{acceso.response.value}}</p>
+    </div>
+    <div class="panel panel-default with-table" ng-init="usuariogrupos.init(tab)" >
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-4 col-xs-4 col-lg-4">
+                    <a class="btn btn-primary btn-sm" ng-click="usuariogrupos.goBack(tab)">
+                        <span class="glyphicon glyphicon-level-up"></span>
+                        Volver 
+                    </a>
+                </div>
+                <div class="col-md-4 col-xs-8 col-lg-4">
+                    <div class="input-group input-group-sm hidden-xs">
+                        <input type="navbar-search" class="form-control" placeholder="Buscar grupos...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">
+                                Buscar</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="table">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th class="col-md-4 col-lg-4">
+                            Nombre
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                        <tr ng-hide="usuariogrupos.items.length">
+                            <td colspan="3">
+                                No hay registros.
+                            </td>
+                        </tr>
+                        <tr ng-repeat="usugru in usuariogrupos.items">
+                            <td class="col-sm-4 col-md-4 col-lg-4">
+                                {{usugru.Grupo.Nombre}}
+                            </td>
+                            <td class="hidden-xs" width="90%">
+                                <!-- spacer -->
+                            </td>
+                            <td>
+                                <a  ng-click="usuariogrupos.removeGroupFromUser(usugru)" class="btn btn-xs btn-default" data-ajax>
+                                    <span class="glyphicon glyphicon-arrow-down"></span>
+                                    <text class="hidden-xs">Remover</text>
+                                </a>
+                            </td>
+                        </tr>
+                </tbody>
+            </table>
+            
+        </div>
+        
+    </div>
+
+    <h3 ng-show="usuariogrupos.grupos.length" class="page-header">Grupos excluidos</h3>
+    <div class="panel panel-default with-table" ng-show="usuariogrupos.grupos.length">
+        <table class="table" style="margin: 4px" >
+            <tr>
+                <th>
+                    Nombre
+                </th>
+                <th>
+                </th>
+            </tr>
+                <tr ng-repeat="group in usuariogrupos.grupos">
+                    <td>
+                        {{group.Nombre}}
+                    </td>
+                    <td class=" text-right col-md-4 col-lg-4 col-xs-4">
+                           
+                        <a  ng-click="usuariogrupos.addGroupToUser(usuariogrupos.item, group)" class="btn btn-xs btn-default" data-ajax>
+                            <span class="glyphicon glyphicon-arrow-up"></span>
+                            <text class="hidden-xs">Agregar</text>
+                        </a>
+                    </td>
+                </tr>
+        </table>
+    </div>
+</div>

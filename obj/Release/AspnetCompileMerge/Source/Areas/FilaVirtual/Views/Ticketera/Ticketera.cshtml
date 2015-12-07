@@ -1,0 +1,33 @@
+﻿<html>
+    <head>
+        <link href="../../Resources/bootstrap-3.3.5-dist/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <div class="ticketera-panel" ng-init="configT.init(getParameterByName('id'))" ng-controller="ConfTickController as configT">
+            <h4 class="page-header text-center">
+                {{configT.ticketera.Descripcion}}</h4>
+            <div ng-repeat="group in configT.grupos">
+                <label class="label-control">
+                    {{group.Descripcion}}</label>
+                <div class="form-group border-div">
+                        <div class="text-center">
+                            <a ng-click="routing.printTicket(child)" class="btn btn-primary btn-lg btn-tick" style="margin: 10px;position:relative;height:45px" ng-repeat="child in group.children">
+                                <img ng-src="{{child.Valor}}" style="height:100%;margin-right:10px">{{child.Descripcion}}
+                            </a>
+                        </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            function getParameterByName(name) {
+                name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+                var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
+                results = regex.exec(location.search);
+                return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+            }
+        </script>
+        
+    </body>
+
+    
+</html>

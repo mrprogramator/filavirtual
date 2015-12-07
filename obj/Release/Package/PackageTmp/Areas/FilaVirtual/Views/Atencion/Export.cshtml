@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html ng-app="ExporterApp">
+    <head>
+        <title>Exportador de Atenciones</title>
+         <link href="~/Resources/bootstrap-3.3.5-dist/css/bootstrap.css" rel="stylesheet"
+        type="text/css" />
+
+        <link href="~/Resources/css/special-glyphicons.css" rel="stylesheet" type="text/css" />
+        <link href="~/Resources/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css" />
+
+        <script src="~/Resources/js/jquery-2.1.4.js" type="text/javascript"></script>
+        
+        <script src="~/Resources/datetimepicker/js/moment.js" type="text/javascript"></script>
+        <script src="~/Resources/datetimepicker/js/datetimepicker.js" type="text/javascript"></script>
+        
+        <script src="~/Resources/bootstrap-3.3.5-dist/js/bootstrap.js" type="text/javascript"></script>
+        <script src="~/Resources/js/angular.js" type="text/javascript"></script>
+        <script src="~/Resources/js/angular-animate.js" type="text/javascript"></script>
+        <script src="~/Resources/js/angular-ui/ui-bootstrap-tpls.js" type="text/javascript"></script>
+        <script src="~/Resources/operador/js/jquery.signalR-2.2.0.js"></script>
+
+        <script src="~/signalr/hubs" type="text/javascript"></script>
+    </head>
+    <body ng-controller="ExporterController as exporter" style="padding:30px">
+        <h2 class="page-header">
+            Exportar Atenciones
+        </h2>
+        <div class="entity-editor">
+            <div ng-show="exporter.info.status == true" class="alert alert-info">
+                <button type="button" class="close" ng-click="exporter.info.status = false" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                    <span class="glyphicon glyphicon-info-sign" style="margin-right:5px"></span>
+                    {{exporter.info.message}}
+            </div>
+            <div class="row">
+                <form name="myForm" method="post" ng-submit="exporter.exportar()">
+                    <div class="form-group col-md-3">
+                        <div class='input-group input-group-sm date'>
+                            <input id="dTPInicio" type='text' class="form-control input-lg" placeholder="Inicio"/>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <div class='input-group input-group-sm date'>
+                            <input id="dTPFin" type='text' class="form-control input-lg" placeholder="Fin"/>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-3" ng-class="{ 'has-error': myForm.Cantidad.$dirty && myForm.Cantidad.$invalid, 'has-success' : myForm.Cantidad.$dirty && myForm.Cantidad.$valid}">
+                        <div class="checkbox col-md-7">
+                            <input type="checkbox" name="CheckIns" ng-model="exporter.all">Todas las atenciones<br>
+                        </div>
+                        <div class="col-md-5">
+                            <input placeholder="Cantidad" ng-if="!exporter.all" name="Cantidad" class="form-control input-sm" ng-model="exporter.cantidad" type="number" min="1"/>
+                            <p class="help-block" ng-if="myForm.Cantidad.$dirty && myForm.Cantidad.$error.required">Campo requerido</p>
+                            <p class="help-block" ng-if="myForm.Cantidad.$dirty && myForm.Cantidad.$error.number">Debe ingresar un número válido</p>
+                            <p class="help-block" ng-if="myForm.Cantidad.$dirty && myForm.Cantidad.$error.min">Debe ingresar un número mayor o igual a 1</p>
+                        </div>
+                    </div>
+
+                    </div>
+                    <div class="form-group col-md-3">
+                        <a ng-click="exporter.volver(tab)" class="btn btn-sm btn-link">Volver</a>
+                        <button type="submit" class="btn btn-sm btn-primary">Exportar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div ng-if="exporter.exporting">
+             {{exporter.message}} ({{exporter.exportadas}}/{{exporter.atencionesLength}})
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="70"
+              aria-valuemin="0" aria-valuemax="100" ng-style="{width : ( (exporter.exportadas/exporter.atencionesLength) * 100 + '%' ) }">
+                <span class="sr-only">70% Complete</span>
+                {{(exporter.exportadas/exporter.atencionesLength) * 100 | number:0}}%
+              </div>
+            </div>
+        </div>
+        <div ng-if="exporter.items.length > 0">
+            <h4 class="page-header">Atenciones Exportadas</h4>
+            <table class="table" style="margin: 4px">
+                <tr>
+                    <th>
+                        Usuario
+                    </th>
+                    <th>
+                        Ticket
+                    </th>
+                    <th>
+                        Fecha
+                    </th>
+                    <th class="hidden-xs">
+                        Estado
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+                <tr ng-if="exporter.items.length==0 && !exporter.loading">
+                    <td>
+                        No hay registros
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr ng-repeat="item in exporter.items">
+                    <td>
+                        {{item.LogUsr}}
+                    </td>
+                    <td>
+                        {{item.NroTicket}}
+                    </td>
+                    <td>
+                        {{ item.FechaLlamado | date:'dd/MM/yyyy h:mm a' }}
+                    </td>
+                    <td class="hidden-xs">
+                        {{item.EstadoValor}}
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <script type="text/javascript">
+            $(function () {
+                $('.date').datetimepicker({
+                    format: 'DD/MM/YYYY',
+                    locale: 'es'
+                });
+            });
+        </script>
+        <script src="~/Resources/js/angular-modules/exportador-atenciones.js" type="text/javascript"></script>
+    </body>
+</html>

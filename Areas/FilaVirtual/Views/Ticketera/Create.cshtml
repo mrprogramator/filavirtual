@@ -1,0 +1,57 @@
+﻿@{
+    Layout = "~/Views/Shared/_CenteredLayout.cshtml";
+
+    ViewBag.Title = "Nueva Ticketera";
+}
+@model SistemaDeGestionDeFilas.Areas.FilaVirtual.Models.Ticketera
+
+<h2 class="page-header">
+    @ViewBag.Title
+</h2>
+<div class="entity-editor" ng-controller="TicketeraController as ticketera">
+    <div ng-show="ticketera.response.result == false" class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="title">
+            Error</h4>
+        <p>
+            {{ticketera.response.value}}</p>
+    </div>
+    <form id="identicalForm" ng-init="item=@Html.Raw(Json.Encode(Model))" method="POST" data-toggle="validator" ng-submit="ticketera.save(tab, item)">
+    <div class="form-group ">
+        <label class="label-control">
+            Código</label>
+        <input class="form-control" ng-model="item.Id" required />
+        <div class="help-block with-errors">
+        </div>
+    </div>
+    <div class="form-group ">
+        <label class="label-control">
+            Descripcion</label>
+        <input class="form-control" ng-model="item.Descripcion" required />
+        <div class="help-block with-errors">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="label-control">
+            Punto</label>
+        <select class="form-control" ng-model="item.PuntoId" required>
+            <option ng-selected="{{punto == item.Punto }}"
+                    ng-repeat="punto in ticketera.puntos"
+                    value="{{punto.Id}}">
+              {{punto.Descripcion}}
+            </option>
+        </select>
+    </div>
+    <div class="text-right">
+        <a href="#" ng-click="ticketera.volver(tab)" class="btn btn-link" data-ajax>
+            Cancelar</a>
+        <button type="submit" class="btn btn-primary">
+            Guardar</button>
+    </div>
+    </form>
+</div>
+<script type="text/javascript">
+    $('form[data-toggle="validator"]').validator();
+</script>

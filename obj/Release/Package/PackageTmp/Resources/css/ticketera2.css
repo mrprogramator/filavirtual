@@ -1,0 +1,76 @@
+﻿.ticketera-panel
+{
+    margin: 80px auto;
+    /*max-width:700px;*/
+}
+
+::-webkit-scrollbar { 
+    display: none; 
+}
+
+.border-div
+{
+    border-radius: 10px;
+    padding: 20px;
+    border: 1px solid #eee;
+}
+
+.footer
+{
+    text-align: center;
+    color: #767676;
+    border-top: 1px solid #e5e5e5;
+    width: 100%;
+}
+
+@media screen and (max-width: 400px)
+{
+    .btn-tick
+    {
+        width:100%;
+    }
+    .btn-tick-right
+    {
+    }
+    .btn-tick-left
+    {
+    }
+}
+.btn-tick
+{
+    white-space:normal;
+    min-height:70px;
+    width:100%;
+}
+
+@media screen and (min-width: 500px)
+{
+    
+    .btn-tick-right
+    {
+        float:right;
+    }
+    .btn-tick-left
+    {
+        float:left;
+    }
+}
+@media screen and (max-width: 500px)
+{
+    
+    btn-tick
+    {
+        width:300%;
+    }
+}
+
+.marquee-div
+{
+    background-color:Yellow;
+    color:Black;
+    position:absolute;
+    bottom:0;
+    width:100%;
+    z-index=9999999999999; 
+    height:35px
+}

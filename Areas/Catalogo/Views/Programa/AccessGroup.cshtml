@@ -1,0 +1,146 @@
+﻿@model SistemaDeGestionDeFilas.Areas.Catalogo.Models.Programa
+@{
+    ViewBag.Title = "Accesos de Grupos a " + Model.Nombre;
+}
+<h2 class="page-header">
+    @ViewBag.Title
+</h2>
+<div ng-controller="AccesoGrupoController as acceso">
+    <div ng-show="acceso.response.result == false" class="alert alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      
+      <h4 class="title">Error</h4>
+      <p>{{acceso.response.value}}</p>
+    </div>
+    <div class="panel panel-default with-table" ng-init="acceso.init(tab)" >
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-4 col-xs-4 col-lg-4">
+                    <a class="btn btn-primary btn-sm" ng-click="acceso.goBack(tab, acceso.item.Id)">
+                        <span class="glyphicon glyphicon-level-up"></span>
+                        Volver 
+                    </a>
+                </div>
+                <div class="col-md-4 col-xs-8 col-lg-4">
+                    <div class="input-group input-group-sm hidden-xs">
+                        <input type="navbar-search" class="form-control" placeholder="Buscar grupos...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">
+                                Buscar</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="table">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th class="col-md-4 col-lg-4">
+                            Nombre
+                        </th>
+                        <th width="90%">
+                            <!-- spacer -->
+                        </th>
+                        <th ng-show="acceso.item.CheckSel" class="text-center col-md-2 col-sm-12 col-lg-8 hidden-xs">
+                            Seleccionar
+                        </th>
+                        <th ng-show="acceso.item.CheckIns" class="text-center col-md-2 col-sm-12 col-lg-8 hidden-xs">
+                            Insertar
+                        </th>
+                        <th ng-show="acceso.item.CheckMod" class="text-center col-md-2 col-sm-12 col-lg-8 hidden-xs">
+                            Modificar
+                        </th>
+                        <th ng-show="acceso.item.CheckEli" class="text-center col-md-2 col-sm-12 col-lg-8 hidden-xs">
+                            Eliminar
+                        </th>
+                        <th ng-show="acceso.item.CheckImp" class="text-center col-md-2 col-sm-12 col-lg-8 hidden-xs">
+                            Imprimir
+                        </th>
+                        <th>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                        <tr ng-hide="acceso.items.length">
+                            <td colspan="3">
+                                No hay registros.
+                            </td>
+                        </tr>
+                        <tr ng-repeat="acc in acceso.items">
+                            <td class="col-sm-4 col-md-4 col-lg-4">
+                                {{acc.Grupo.Nombre}}
+                            </td>
+                            <td class="hidden-xs" width="90%">
+                                <!-- spacer -->
+                            </td>
+                            <td ng-show="acceso.item.CheckSel" class="text-center col-md-2 col-sm-12 col-lg-8 hidden-xs">
+                                <div class="checkbox">
+                                    <input type="checkbox" ng-model="acc.CheckSel" ng-click="acceso.update(acc)">
+                                </div>
+                            </td>
+                            <td ng-show="acceso.item.CheckIns" class=" text-center col-md-2 col-sm-12 col-lg-8 hidden-xs">
+                                <div class="checkbox">
+                                    <input type="checkbox" ng-model="acc.CheckIns" ng-click="acceso.update(acc)">
+                                </div>
+                            </td>
+                            <td ng-show="acceso.item.CheckMod" class=" text-center col-md-2 col-sm-12 col-lg-8 hidden-xs">
+                                <div class="checkbox">
+                                    <input type="checkbox" ng-model="acc.CheckMod" ng-click="acceso.update(acc)">
+                                </div>
+                            </td>
+                            <td ng-show="acceso.item.CheckEli" class=" text-center col-md-2 col-sm-12 col-lg-8 hidden-xs">
+                                <div class="checkbox">
+                                    <input type="checkbox" ng-model="acc.CheckEli" ng-click="acceso.update(acc)">
+                                </div>
+                            </td>
+                            <td ng-show="acceso.item.CheckImp" class=" text-center col-md-2 col-sm-12 col-lg-8 hidden-xs">
+                                <div class="checkbox">
+                                    <input type="checkbox" ng-model="acc.CheckImp" ng-click="acceso.update(acc)">
+                                </div>
+                            </td>
+                            <td class="text-right hidden-sm hidden-md hidden-lg">
+                                <a class="btn btn-xs btn-default" type="button" ng-click="acceso.detail(tab, acc)">
+                                    <span class="glyphicon glyphicon-cog"></span></a>
+                            </td>
+                            <td>
+                                <a  ng-click="acceso.removeFromAccess(acc)" class="btn btn-xs btn-default" data-ajax>
+                                    <span class="glyphicon glyphicon-arrow-down"></span>
+                                    <text class="hidden-xs">Remover</text>
+                                </a>
+                            </td>
+                        </tr>
+                </tbody>
+            </table>
+            
+        </div>
+        
+    </div>
+
+    <h3 ng-show="acceso.grupos.length" class="page-header">Grupos excluidos</h3>
+    <div class="panel panel-default with-table" ng-show="acceso.grupos.length">
+        <table class="table" style="margin: 4px" >
+            <tr>
+                <th>
+                    Nombre
+                </th>
+                <th>
+                </th>
+            </tr>
+                <tr ng-repeat="group in acceso.grupos">
+                    <td>
+                        {{group.Nombre}}
+                    </td>
+                    <td class=" text-right col-md-4 col-lg-4 col-xs-4">
+                           
+                        <a  ng-click="acceso.addToAccess(group, acceso.item)" class="btn btn-xs btn-default" data-ajax>
+                            <span class="glyphicon glyphicon-arrow-up"></span>
+                            <text class="hidden-xs">Agregar</text>
+                        </a>
+                    </td>
+                </tr>
+        </table>
+    </div>
+</div>
