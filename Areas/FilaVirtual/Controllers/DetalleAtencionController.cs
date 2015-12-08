@@ -74,6 +74,15 @@ namespace SistemaDeGestionDeFilas.Areas.FilaVirtual.Controllers
 
         }
 
+        [HttpPost]
+        [Route("puntos/{puntoId}/arbol-transacciones/{inicio}/{fin}")]
+        public JsonResult GetArbolTransacciones(String puntoId, DateTime inicio, DateTime fin)
+        {
+            var data = dtAtencionRepository.GetArbolTransaccion(inicio, fin, puntoId);
+            
+            return Json(data);
+        }
+
         public JsonResult GetTransacciones(Int32 atencionId)
         {
             var data = dtAtencionRepository

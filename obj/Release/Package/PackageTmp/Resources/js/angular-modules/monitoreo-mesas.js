@@ -181,6 +181,11 @@
             console.log('puntoId', self.redirect);
             getMesas(self.puntoId).then(function (promise) {
                 self.mesas = promise.data;
+
+                self.mesas.forEach(function (mesa) {
+                    mesa.detalles = true;
+                });
+
                 refreshStates();
             })
 

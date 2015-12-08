@@ -124,3 +124,113 @@ ul.nav.nav-list.abn-tree .level-9 .indented {
   position: relative;
   left: 160px;
 }
+
+
+.abn-tree-cantidad a
+{
+    color: black;
+    border-bottom:solid 1px gray;
+    border-left:solid 1px gray;
+    border-right:solid 1px gray;
+
+}
+
+ul.abn-tree-cantidad li.abn-tree-row {  
+  padding: 0px;
+  margin:0px;
+}
+
+ul.abn-tree-cantidad li.abn-tree-row a {
+  padding: 3px 10px;
+}
+
+ul.abn-tree-cantidad i.indented {
+  padding: 2px;
+}
+
+.abn-tree-cantidad {
+  cursor: pointer;
+}
+ul.nav.abn-tree-cantidad .level-1 .indented {
+  position: relative;
+  left: 0px;
+}
+ul.nav.abn-tree-cantidad .level-2 .indented {
+  position: relative;
+  left: 20px;
+}
+ul.nav.abn-tree-cantidad .level-3 .indented {
+  position: relative;
+  left: 40px;
+}
+ul.nav.abn-tree-cantidad .level-4 .indented {
+  position: relative;
+  left: 60px;
+}
+ul.nav.abn-tree-cantidad .level-5 .indented {
+  position: relative;
+  left: 80px;
+}
+ul.nav.abn-tree-cantidad .level-6 .indented {
+  position: relative;
+  left: 100px;
+}
+ul.nav.nav-list.abn-tree-cantidad .level-7 .indented {
+  position: relative;
+  left: 120px;
+}
+ul.nav.nav-list.abn-tree-cantidad .level-8 .indented {
+  position: relative;
+  left: 140px;
+}
+ul.nav.nav-list.abn-tree-cantidad .level-9 .indented {
+  position: relative;
+  left: 160px;
+}
+
+.abn-tree-cantidad li.first {
+    border-top: solid 1px gray;
+    background-color: rgba(28, 58, 112, 1);
+    font: bold 14px arial;
+}
+
+.abn-tree-cantidad li.first a{
+    font: bold 16px arial;
+    color: white;
+}
+
+.abn-tree-cantidad li.last {
+    font: bold 16px arial;
+}
+
+.abn-tree-cantidad li.last a{
+    font: bold 16px arial;
+}
+
+ul.abn-tree-cantidad li.abn-tree-row.level-2 {
+    font: bold 16px arial;
+}
+
+ul.abn-tree-cantidad li.abn-tree-row.level-3 a{
+}
+
+ul.abn-tree-cantidad li.abn-tree-row.level-4 {
+    color:red;
+}
+
+ul.abn-tree-cantidad li.abn-tree-row.level-4 a{
+    font-style: italic;
+}
+
+ul.abn-tree-cantidad li.abn-tree-row.level-5 a{
+    color: gray;
+}
+
+ul.abn-tree-cantidad li.abn-tree-row.level-6 a {
+    font-style: italic;
+    color: gray;
+}
+
+.report-title {
+    font: bold 20px arial;
+}

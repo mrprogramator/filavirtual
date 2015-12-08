@@ -218,7 +218,7 @@
                         });
 
             self.data = my_tree;
-            console.log(my_tree);
+            console.log('my_tree',my_tree);
             console.log('ITEMS',self.items);
             
             self.loading = false;

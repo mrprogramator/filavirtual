@@ -861,7 +861,8 @@ app.controller("OperadorController", function ($http, $location, $timeout,  $cac
     });
 
     self.handleClose = function () {
-        if (!self.activo) {
+        if (self.activo != ACTIVO) {
+            $('#cannotCloseModal').modal('show');
             return;
         }
         localStorage.removeItem('user');

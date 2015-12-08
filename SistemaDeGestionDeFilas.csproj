@@ -273,6 +273,7 @@
     <Compile Include="Areas\FilaVirtual\Repositorios\AgenteRepository.cs" />
     <Compile Include="Areas\FilaVirtual\Repositorios\TicketeraRepository.cs" />
     <Compile Include="Areas\Reporte\Controllers\ReportController.cs" />
+    <Compile Include="Areas\Reporte\Models\ArbolTransaccion.cs" />
     <Compile Include="Areas\Reporte\Models\AtencionesOperador.cs" />
     <Compile Include="Areas\Reporte\Models\AusenciaOperador.cs" />
     <Compile Include="Areas\Reporte\Models\CantidadTransaccion.cs" />
@@ -1039,6 +1040,7 @@
     <Content Include="Resources\js\angular-modules\exportador-atenciones.js" />
     <Content Include="Resources\js\angular-modules\reportes\atenciones-operador.js" />
     <Content Include="Resources\js\angular-modules\reportes\ausencia-operador.js" />
+    <Content Include="Resources\js\angular-modules\reportes\arbol-transacciones.js" />
     <Content Include="Resources\js\angular-modules\reportes\tiempo-operador.js" />
     <Content Include="Resources\js\angular-modules\reportes\transacciones-parametrica.js" />
     <Content Include="Resources\js\angular-modules\reportes\main.js" />
@@ -1072,6 +1074,7 @@
     <Content Include="Resources\js\ng-bootstrap.treeview\dist\abn_tree.css" />
     <Content Include="Resources\js\ng-bootstrap.treeview\dist\abn_tree_directive.js" />
     <Content Include="Resources\js\ng-bootstrap.treeview\dist\abn_tree_btn_directive.js" />
+    <Content Include="Resources\js\ng-bootstrap.treeview\dist\abn_tree_directive_cantidad.js" />
     <Content Include="Resources\js\ng-bootstrap.treeview\ng-treeview.js" />
     <Content Include="Resources\js\recorder-plugin\app.js" />
     <Content Include="Resources\js\recorder-plugin\lib\libvorbis.asmjs.js" />
@@ -1525,6 +1528,7 @@
     <Content Include="Areas\Reporte\Views\Report\AusenciaOperador.cshtml" />
     <Content Include="Areas\FilaVirtual\Views\Agente\MonitoreoMesas.cshtml" />
     <Content Include="Areas\FilaVirtual\Views\Agente\Monitoreo.cshtml" />
+    <Content Include="Areas\Reporte\Views\Report\ArbolTransaccion.cshtml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />

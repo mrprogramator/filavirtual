@@ -30,6 +30,11 @@ namespace SistemaDeGestionDeFilas.Areas.Reporte.Controllers
             return View();
         }
 
+        public ActionResult ArbolTransaccion()
+        {
+            return View();
+        }
+
         public ActionResult ReportView(Models.Reporte model)
         {
             var report = new TypeReportSource() { TypeName = model.TypeName };

@@ -196,6 +196,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Areas/FilaVirtual/Views/Web.config">
       <publishTime>11/06/2015 08:38:22</publishTime>
     </File>
+    <File Include="Areas/Reporte/Views/Report/ArbolTransaccion.cshtml">
+      <publishTime>12/08/2015 16:01:22</publishTime>
+    </File>
     <File Include="Areas/Reporte/Views/Report/AtencionesHora.cshtml">
       <publishTime>11/27/2015 11:57:43</publishTime>
     </File>
@@ -335,7 +338,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/23/2015 20:57:36</publishTime>
     </File>
     <File Include="bin/SistemaDeGestionDeFilas.dll">
-      <publishTime>12/07/2015 17:38:37</publishTime>
+      <publishTime>12/08/2015 12:07:01</publishTime>
     </File>
     <File Include="bin/System.Data.SqlServerCe.dll">
       <publishTime>10/23/2015 20:57:42</publishTime>
@@ -2912,10 +2915,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/06/2015 10:49:12</publishTime>
     </File>
     <File Include="Resources/js/angular-modules/monitoreo-mesas.js">
-      <publishTime>12/07/2015 12:05:30</publishTime>
+      <publishTime>12/08/2015 16:08:03</publishTime>
     </File>
     <File Include="Resources/js/angular-modules/parametro.js">
-      <publishTime>11/20/2015 09:10:30</publishTime>
+      <publishTime>12/08/2015 10:09:39</publishTime>
     </File>
     <File Include="Resources/js/angular-modules/programa.js">
       <publishTime>11/16/2015 00:49:05</publishTime>
@@ -2925,6 +2928,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Resources/js/angular-modules/reporte.js">
       <publishTime>11/18/2015 08:33:25</publishTime>
+    </File>
+    <File Include="Resources/js/angular-modules/reportes/arbol-transacciones.js">
+      <publishTime>12/08/2015 15:47:23</publishTime>
     </File>
     <File Include="Resources/js/angular-modules/reportes/atenciones-atendidas.js">
       <publishTime>11/27/2015 12:01:30</publishTime>
@@ -2999,13 +3005,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/11/2015 14:02:47</publishTime>
     </File>
     <File Include="Resources/js/ng-bootstrap.treeview/dist/abn_tree.css">
-      <publishTime>08/11/2015 14:02:47</publishTime>
+      <publishTime>12/08/2015 12:01:56</publishTime>
     </File>
     <File Include="Resources/js/ng-bootstrap.treeview/dist/abn_tree_btn_directive.js">
       <publishTime>08/26/2015 07:54:45</publishTime>
     </File>
     <File Include="Resources/js/ng-bootstrap.treeview/dist/abn_tree_directive.js">
       <publishTime>08/25/2015 17:58:23</publishTime>
+    </File>
+    <File Include="Resources/js/ng-bootstrap.treeview/dist/abn_tree_directive_cantidad.js">
+      <publishTime>12/08/2015 10:33:52</publishTime>
     </File>
     <File Include="Resources/js/ng-bootstrap.treeview/ng-treeview.js">
       <publishTime>08/11/2015 14:02:47</publishTime>
@@ -3182,7 +3191,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/23/2015 21:02:10</publishTime>
     </File>
     <File Include="Resources/operador/js/ng-comeback.js">
-      <publishTime>10/13/2015 12:27:34</publishTime>
+      <publishTime>12/08/2015 17:11:50</publishTime>
     </File>
     <File Include="Resources/operador/js/ng-derivar.js">
       <publishTime>11/06/2015 12:10:51</publishTime>
@@ -3191,7 +3200,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/11/2015 09:11:59</publishTime>
     </File>
     <File Include="Resources/operador/js/ng-operador.js">
-      <publishTime>12/07/2015 13:03:14</publishTime>
+      <publishTime>12/08/2015 16:46:21</publishTime>
     </File>
     <File Include="Resources/operador/js/ng-tickets.js">
       <publishTime>11/06/2015 12:08:06</publishTime>
@@ -4190,10 +4199,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/13/2015 08:44:55</publishTime>
     </File>
     <File Include="Views/Operador/Index.cshtml">
-      <publishTime>11/27/2015 11:14:54</publishTime>
+      <publishTime>12/08/2015 17:28:23</publishTime>
     </File>
     <File Include="Views/Operador/Login.cshtml">
-      <publishTime>11/17/2015 14:57:03</publishTime>
+      <publishTime>12/08/2015 16:59:03</publishTime>
     </File>
     <File Include="Views/Parametro/Create.cshtml">
       <publishTime>10/28/2015 10:03:07</publishTime>
@@ -4262,7 +4271,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/11/2015 14:03:45</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>12/07/2015 00:38:11</publishTime>
+      <publishTime>12/08/2015 10:18:13</publishTime>
     </File>
     <File Include="Views/Shared/_NavBar.cshtml">
       <publishTime>11/26/2015 16:46:11</publishTime>

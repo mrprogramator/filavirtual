@@ -1,0 +1,83 @@
+﻿<link href="~/Resources/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css" />
+
+<div ng-controller="ArbolTransaccionesController as arbolt">
+    
+    <div class="row">
+        <h2 class="page-header">Cantidad de Transacciones por Paramétrica</h2>
+        <form method="post" ng-submit="arbolt.getArbol()">
+        
+            <div class="form-group col-md-3">
+                <div class='input-group input-group-sm date'>
+                    <input id="dTPInicio" type='text' class="form-control input-lg" placeholder="Inicio"/>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group col-md-3">
+                <div class='input-group input-group-sm date'>
+                    <input id="dTPFin" type='text' class="form-control input-lg" placeholder="Fin"/>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group col-md-3">
+                <div class="col-sm-2">
+                    <h6><strong>Punto</strong></h6>
+                </div>
+                <div class="col-sm-10">
+                <select name="PuntoId" class="input-sm form-control" ng-model="arbolt.puntoId" required>
+                    <option ng-repeat="punto in arbolt.puntos"
+                            value="{{punto.Id}}">
+                        {{punto.Descripcion}}
+                    </option>
+                </select>
+                </div>
+            </div>
+            <div class="form-group col-md-3">
+                <button type="submit" class="btn btn-sm btn-primary">Generar Reporte</button>
+            </div>
+        </form>
+    </div>
+    <div ng-if="arbolt.loadingTree" class="row text-center">
+        <a class="btn btn-default" onclick="printDiv('reportArbol')"><span class="glyphicon glyphicon-print"></span>Imprimir</a>
+    </div>
+    <div id="reportArbol" ng-if="arbolt.loadingTree" class="row" style="max-width:600px; margin:40px auto">
+        <div class="row">
+            <div style="position:absolute; margin-left:20px">
+            <img src="Resources/img/logo_cotas.png" style="height:70px"/>
+        </div>
+        <div class="text-center report-title" style="margin-left:95px">
+            REPORTE DE CANTIDAD DE TRANSACCIONES POR PARAMÉTRICA
+            <h6><strong>PUNTO:</strong> {{arbolt.punto.Descripcion | uppercase }}</h6>
+        </div>
+        </div>
+        <div class="row" style="margin-top:40px; margin-bottom: 40px; margin-left:10px; margin-right:10px">
+            <strong>Fecha de Inicio: </strong> {{arbolt.inicio}}
+            <div class="pull-right"><strong>Fecha de Fin: </strong> {{arbolt.fin}}</div>
+        </div>
+        <abn-tree-cantidad ng-if="arbolt.loadingTree" tree-data="arbolt.data" expand-level="100" 
+            on-select="arbolt.selectedBranch = branch" ng-click="arbolt.handleClick()">
+        </abn-tree-cantidad>
+    </div>
+</div>
+
+<script src="~/Resources/datetimepicker/js/moment.js" type="text/javascript"></script>
+<script src="~/Resources/datetimepicker/js/datetimepicker.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        $('.date').datetimepicker({
+            format: 'DD/MM/YYYY',
+            locale: 'es'
+        });
+    });
+    function printDiv(divName) {
+        var printContents = document.getElementById(divName).innerHTML;
+        var originalContents = document.body.innerHTML;
+
+        document.body.innerHTML = printContents;
+
+        window.print();
+
+        document.body.innerHTML = originalContents;
+    }
+</script>

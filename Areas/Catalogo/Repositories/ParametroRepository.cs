@@ -105,5 +105,12 @@ namespace SistemaDeGestionDeFilas.Areas.Catalogo.Repositories
 
             return data;
         }
+
+        public IEnumerable<Entities.Parametro> GetTiposDeAtencion()
+        {
+            var data = GetByGroup(TIPAT).ToArray();
+
+            return data;
+        }
     }
 }

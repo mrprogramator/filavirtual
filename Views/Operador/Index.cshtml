@@ -322,6 +322,7 @@
     ng-controller="ComebackController as comeback" ng-init="comeback.user={Id:operador.myLog}">
       <div class="modal-dialog">
         <div class="modal-content modal-blue">
+
           <div class="modal-header op-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h3 class="modal-title">Verificaci&oacute;n de usuario</h3>
@@ -329,16 +330,7 @@
           
           <div class="modal-body">
             <div class="well">
-            <div class="alert alert-danger" ng-show="comeback.response.result == false">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="title">
-                    Error</h4>
-                <p>
-                    {{comeback.response.value}}
-                </p>
-            </div>
+            
             <form method="POST" ng-submit='comeback.logUser(comeback.user, operador.activar)'>
               <div class="form-group">
                   <div class="input-group">
@@ -552,6 +544,40 @@
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+
+       <div class="modal fade" id="cannotCloseModal">
+          <div class="modal-dialog modal-blue">
+              <div class="modal-content modal-blue" style="color:white; height:200px">
+                  <h4 class="text-center page-header">
+                    <strong>Atención</strong>
+                </h4>
+                  <div style="margin-left:15px">
+                  Para cerrar el programa debe estar activo
+                  </div>
+                    <div class="text-center" style="margin-top:40px">
+                            <a class="btn btn-default" data-dismiss="modal" >Aceptar</a>
+                    </div>
+            
+              </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+
+      <div class="modal fade" id="wrongPasswordModal">
+          <div class="modal-dialog modal-blue">
+              <div class="modal-content modal-blue" style="color:white; height:150px">
+                  <h4 class="text-center page-header">
+                    <strong>Atención</strong>
+                </h4>
+                  <div style="margin-left:15px">
+                      Contraseña Incorrecta
+                  </div>
+                    <div class="text-center">
+                            <a class="btn btn-default" data-dismiss="modal" >Aceptar</a>
+                    </div>
+            
+              </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
     <div class="footer-container">
       <footer>
         COTAS LTDA. <span class="glyphicon glyphicon-copyright-mark"></span> Todos los derechos reservados

@@ -8,6 +8,7 @@
     using Telerik.Reporting.Drawing;
     using Areas.FilaVirtual;
     using System.Linq;
+    using System.Collections.Generic;
 
     public partial class TransaccionesPorParametrica : Telerik.Reporting.Report
     {
@@ -42,6 +43,11 @@
             this.table1.StyleName = "Corporate.TableNormal";
 
             //this.DataSource = transacciones.ToList();
+        }
+
+        public Areas.Reporte.Models.Prueba GetItemValue(List<Areas.Reporte.Models.Prueba> lista, int index)
+        {
+            return lista[index];
         }
     }
 }

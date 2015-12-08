@@ -1,5 +1,5 @@
 ﻿angular.module('OperadorApp')
-    .controller('ComebackController', function ($http, $cacheFactory, $window, $location) {
+    .controller('ComebackController', function ($http, $cacheFactory, $window, $location, $timeout) {
         url = $location.$$absUrl.substr(0, $location.$$absUrl.indexOf("/operador"));
         self = this;
         self.loading = true;
@@ -72,40 +72,46 @@
         self.logUser = function (item, callback) {
             console.log('item', item);
             setLogin(item).then(function (promise) {
-                self.response = promise.data;
-                console.log('response', self.response);
-                if (self.response.result) {
-                    console.log('hola');
-                    getAgente(item.Id).then(function (promise) {
-                        var agente = promise.data;
-                        console.log('AGENTE::::::', agente);
-                        if (agente.Id == undefined){
-                            self.response = {
-                                result: false, 
-                                value: 'No existe un agente relacionado con el usuario ingresado'
+                $timeout(function () {
+                    self.response = promise.data;
+                    console.log('response', self.response);
+                    if (!self.response.result) {
+                        $('#wrongPasswordModal').modal('show');
+                    }
+                    if (self.response.result) {
+                        console.log('hola');
+                        getAgente(item.Id).then(function (promise) {
+                            var agente = promise.data;
+                            console.log('AGENTE::::::', agente);
+                            if (agente.Id == undefined) {
+                                self.response = {
+                                    result: false,
+                                    value: 'No existe un agente relacionado con el usuario ingresado'
+                                }
+                                return;
                             }
-                            return;
-                        }
-                        var currentUser = localStorage.getItem('user');
-                        console.log("currentUser:::", currentUser);
-                        if(currentUser == agente.Id) {
+                            var currentUser = localStorage.getItem('user');
+                            console.log("currentUser:::", currentUser);
+                            if (currentUser == agente.Id) {
 
-                            console.log('hola');
-                            $('#comebackModal').modal('toggle');
-                            item.Password = "";
-                            callback();
-                        }
-                        else{
-                            self.response = {
-                                result: false, 
-                                value: 'El usuario y/o la contraseña ingresados no coinciden con el usuario actual'
+                                console.log('hola');
+                                $('#comebackModal').modal('toggle');
+                                item.Password = "";
+                                callback();
                             }
-                            return;
+                            else {
+                                self.response = {
+                                    result: false,
+                                    value: 'El usuario y/o la contraseña ingresados no coinciden con el usuario actual'
+                                }
+                                return;
 
-                        }
-                    });
-                    
-                }
+                            }
+                        });
+
+                    }
+                }, 0);
+                
             })
         }
 
